@@ -2,8 +2,8 @@
     namespace Controllers;
 
     use DAO\PetDAO as PetDAO;
-use Exception;
-use Models\Pet as Pet;
+    use Exception;
+    use Models\Pet as Pet;
 
     class PetController
     {
@@ -78,8 +78,7 @@ use Models\Pet as Pet;
             
         }
 
-        public function Remove($id_pet)
-        {
+        public function Remove($id_pet) {
             $this->petDAO->Remove($id_pet);
 
             $this->ShowListView();

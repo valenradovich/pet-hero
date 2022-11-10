@@ -98,33 +98,39 @@
             require_once(VIEWS_PATH."owner-profile.php");
         }
 
-        public function Login($email, $password)
-        {
-            $owner = $this->ownerDAO->getByEmail($email);
+        public function Login($email, $password) {
+            try {
+                $owner = $this->ownerDAO->GetByEmail($email);
+                
+                if(($owner != null) && ($owner->getPassword() === $password)&&($owner->getUserType() == 1))
+                {
+                    $_SESSION["loggedUser"] = array(
+                    "id"=>$owner->getId(),
+                    "firstname"=>$owner->getFirstName(),
+                    "lastname"=>$owner->getFirstName(),
+                    "email"=>$owner->getEmail(),
+                    "dni"=>$owner->getDNI(),
+                    "id_province"=>$owner->getProvince(), 
+                    "id_city"=>$owner->getCity(),
+                    "live_place"=>$owner->getLiveIn(),
+                    "phone"=>$owner->getPhone(),
+                    "user_type"=>$owner->getUserType(),
+                    "user_type_string"=>$owner->getUserTypeString(),
+                    "photo"=>$owner->getPhoto(),
+                    "full_name"=>$owner->getFullName(),
+                    "address"=>$owner->getAddress());
+                    
+                    echo '<script type="text/javascript">',
+                        'swal("Listo", "Login exitoso", "success");',
+                        '</script>';
+                                        
 
-            if(($owner != null) && ($owner->getPassword() === $password)&&($owner->getUserType() == 1))
-            {
-                $_SESSION["loggedUser"] = array(
-                                                "id"=>$owner->getId(),
-                                                "firstname"=>$owner->getFirstName(),
-                                                "lastname"=>$owner->getFirstName(),
-                                                "email"=>$owner->getEmail(),
-                                                "dni"=>$owner->getDNI(),
-                                                "id_province"=>$owner->getProvince(), 
-                                                "id_city"=>$owner->getCity(),
-                                                "live_place"=>$owner->getLiveIn(),
-                                                "phone"=>$owner->getPhone(),
-                                                "user_type"=>$owner->getUserType(),
-                                                "user_type_string"=>$owner->getUserTypeString(),
-                                                "photo"=>$owner->getPhoto(),
-                                                "full_name"=>$owner->getFullName(),
-                                                "address"=>$owner->getAddress(),
-                                                );
-                #$_SESSION["loggedUser"] = $owner;
-                $this->ownerprofile();
-            }
-            else
+                    $this->ownerprofile();
+                }
+
+            } catch (\Throwable $th) {
                 $this->LoginView("Usuario y/o Contraseña incorrectos");
+            } 
         }
         
         public function Logout()
@@ -134,5 +140,3 @@
             $this->LoginView();
         }
     }
-
-?>

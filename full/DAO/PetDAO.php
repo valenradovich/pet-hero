@@ -6,6 +6,7 @@
 
     use DAO\Connection as Connection;
     use DAO\QueryType as QueryType;
+    use Exception;
 
     class PetDAO implements IPetDAO
     {
@@ -15,22 +16,29 @@
         # manejar dentro de bloque try catch todo dentro del DAO
         public function Add(Pet $pet)
         {
-            $query = "CALL pets_add(?, ?, ?, ?, ?, ?, ?, ?, ?)";
+            try {
+                $query = "CALL pets_add(?, ?, ?, ?, ?, ?, ?, ?, ?)";
             
-            $parameters["name_pet"] = $pet->getName();
-            $parameters["photo"] = $pet->getPhoto();
-            $parameters["id_breed"] = $pet->getBreed();
-            $parameters["id_size"] = $pet->getSize();
-            $parameters["id_pet_type"] = $pet->getPetType();
-            $parameters["vaccines"] = $pet->getVaccines();
-            $parameters["video"] = $pet->getVideo();
-            $parameters["description"] = $pet->getDescription();
-            $parameters["id_owner"] = $pet->getIdOwner(); 
+                $parameters["name_pet"] = $pet->getName();
+                $parameters["photo"] = $pet->getPhoto();
+                $parameters["id_breed"] = $pet->getBreed();
+                $parameters["id_size"] = $pet->getSize();
+                $parameters["id_pet_type"] = $pet->getPetType();
+                $parameters["vaccines"] = $pet->getVaccines();
+                $parameters["video"] = $pet->getVideo();
+                $parameters["description"] = $pet->getDescription();
+                $parameters["id_owner"] = $pet->getIdOwner(); 
+                
+
+                $this->connection = Connection::GetInstance();
+
+                $this->connection->ExecuteNonQuery($query, $parameters, QueryType::StoredProcedure);  
+
+            } catch (Exception $ex) {
+                //throw $th;
+            }
+
             
-
-            $this->connection = Connection::GetInstance();
-
-            $this->connection->ExecuteNonQuery($query, $parameters, QueryType::StoredProcedure);  
             
         }
 

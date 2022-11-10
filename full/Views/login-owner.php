@@ -69,9 +69,7 @@
 
                 <!-- Submit button -->
                 <button type="submit" class="btn btn-success btn-block mb-4">Sign in</button>
-
               </form>
-
             </div>
           </div>
         </div>

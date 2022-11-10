@@ -74,9 +74,6 @@
         public function setOrderDate($order_date) {
             $this->order_date = $order_date;
         }
-
-
-
     }
 
 ?>

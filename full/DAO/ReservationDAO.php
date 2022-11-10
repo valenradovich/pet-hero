@@ -14,16 +14,15 @@
         # falta crear todas las procedure en la base de datos
 
         # manejar dentro de bloque try catch todo dentro del DAO
-        public function Create(Reservation $reservation)
+        public function Add(Reservation $reservation)
         {
-            $query = "CALL reservation_create(?, ?, ?, ?, ?, ?)";
+            $query = "CALL reservation_add(?, ?, ?, ?, ?)";
             
             $parameters["id_owner"] = $reservation->getIdOwner();
             $parameters["id_pet"] = $reservation->getIdPet();
             $parameters["id_keeper"] = $reservation->getIdKeeper();
             $parameters["price"] = $reservation->getPrice();
             $parameters["id_date_range"] = $reservation->getIdDate();
-            $parameters["status"] = $reservation->getStatus();
             
             $this->connection = Connection::GetInstance();
 
@@ -72,6 +71,8 @@
 
         public function getById($id_reservation)
         {
+            $reservation = null;
+            
             $query = "CALL reservations_get_by_id(?)";
 
             $parameters["id_reservation"] = $id_reservation;

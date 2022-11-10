@@ -5,7 +5,7 @@
 
     interface IReservationDAO
     {
-        function Create(Reservation $pet);
+        function Add(Reservation $pet);
         function GetAll();
         function Remove($id_pet);
         function getById($id_pet);

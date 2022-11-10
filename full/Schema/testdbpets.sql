@@ -408,6 +408,61 @@ END$$
 
 DELIMITER ;
 
+DROP PROCEDURE IF EXISTS `reservation_add`;
+
+DELIMITER $$
+
+CREATE PROCEDURE reservation_add (IN id_owner INT, IN id_pet INT, IN id_keeper INT, IN price FLOAT, 
+                                  IN id_date INT)
+BEGIN
+    INSERT INTO reservations
+        (reservations.id_owner, reservations.id_pet, reservations.id_keeper, reservations.price, 
+         reservations.id_date)
+    VALUES
+        (id_owner, id_pet, id_keeper, price, id_date);
+END$$
+
+DELIMITER ;
+
+DROP PROCEDURE IF EXISTS `reservation_get_all`;
+
+DELIMITER $$
+
+CREATE PROCEDURE reservation_get_all ()
+BEGIN
+    SELECT reservations.id_reservation, reservations.id_owner, reservations.id_pet, reservations.id_keeper, 
+           reservations.price, reservations.id_date
+    FROM reservations;
+END$$
+
+DELIMITER ;
+
+DROP PROCEDURE IF EXISTS `reservation_get_by_id`;
+
+DELIMITER $$
+
+CREATE PROCEDURE reservation_get_by_id (IN id INT)
+BEGIN
+    SELECT reservations.id_reservation, reservations.id_owner, reservations.id_pet, reservations.id_keeper, 
+           reservations.price, reservations.id_date
+    FROM reservations
+    WHERE (reservations.id_reservation = id);
+END$$
+
+DELIMITER ;
+
+DROP PROCEDURE IF EXISTS `reservation_remove`;
+
+DELIMITER $$
+
+CREATE PROCEDURE reservation_remove (IN id INT)
+BEGIN
+    DELETE 
+    FROM reservations
+    WHERE (reservations.id_reservation = id);
+END$$
+
+DELIMITER ;
 
 
 
