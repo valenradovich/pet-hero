@@ -7,6 +7,7 @@
     use DAO\ProvinceDAO as ProvinceDAO;
     use DAO\CityDAO as CityDAO;
     use DAO\DateDAO as DateDAO;
+    use DAO\ReservationDAO as ReservationDAO;
 
     use Exception;
 
@@ -20,6 +21,7 @@
             $this->provinceDAO = new ProvinceDAO();
             $this->cityDAO = new CityDAO();
             $this->dateDAO = new DateDAO();
+            $this->reservationDAO = new ReservationDAO();
         }
 
         public function RegisterView($message = "")
@@ -97,7 +99,9 @@
         {
             $keeperList = $this->keeperDAO->getAll();
             $dateList = $this->dateDAO->getAll();
+            # $reservationList = $this->reservationDAO->getAll();
 
+            require_once(VIEWS_PATH."validate-session.php");
             require_once(VIEWS_PATH."keeper-list.php");
         }
 

@@ -3,8 +3,6 @@
 
   include('nav-bar-keeper.php');
 
-  # session_start();
-
   require_once("validate-session.php");
 ?>
 <!-- ################################################################################################ -->

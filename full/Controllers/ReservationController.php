@@ -3,6 +3,10 @@
 
     use DAO\ReservationDAO as ReservationDAO;
     use Models\Reservation as Reservation;
+
+    use DAO\KeeperDAO as KeeperDAO;
+    use DAO\PetDAO as PetDAO;
+
     use Exception;
 
     class ReservationController {
@@ -10,15 +14,19 @@
 
         public function __construct() {
             $this->reservationDAO = new ReservationDAO();
+            $this->keeperDAO = new KeeperDAO();
+            $this->petDAO = new PetDAO();
         }
 
-        public function show_add_view() {
+        public function showAddView() {
+            $keeperList = $this->keeperDAO->getAll();
+            $petList = $this->petDAO->getAll();
+            
             require_once(VIEWS_PATH."validate-session.php");
-            # crear add reservation
             require_once(VIEWS_PATH."add-reservation.php");
         }
 
-        public function show_list_view() {
+        public function showListView() {
             $reservationList = $this->reservationDAO->GetAll();
             require_once(VIEWS_PATH."validate-session.php");
             require_once(VIEWS_PATH."reservation-list.php");
@@ -40,14 +48,14 @@
                 'swal("Listo", "Fecha registrada con éxito", "success");',
                 '</script>';
 
-                $this->show_add_view();
+                $this->showAddView();
 
             } catch (Exception $ex) {
                 echo '<script type="text/javascript">',
                 'swal("Error", "No se pudo registrar la fecha", "error");',
                 '</script>';
 
-                $this->show_add_view();
+                $this->showAddView();
             }
         }
 
@@ -59,14 +67,14 @@
                 'swal("Listo", "Reserva eliminada con éxito", "success");',
                 '</script>';
 
-                $this->show_list_view();
+                $this->showListView();
 
             } catch (Exception $ex) {
                 echo '<script type="text/javascript">',
                 'swal("Error", "No se pudo eliminar la Reserva", "error");',
                 '</script>';
 
-                $this->show_list_view();
+                $this->showListView();
             }
         }
 

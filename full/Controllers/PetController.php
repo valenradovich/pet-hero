@@ -74,8 +74,6 @@
                 $this->ShowAddView();
             }
             
-            
-            
         }
 
         public function Remove($id_pet) {

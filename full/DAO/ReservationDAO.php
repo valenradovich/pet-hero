@@ -6,27 +6,31 @@
 
     use DAO\Connection as Connection;
     use DAO\QueryType as QueryType;
+    use Exception;
 
     class ReservationDAO implements IReservationDAO {
         private $connection;
         private $tableName = "reservations";
 
-        # falta crear todas las procedure en la base de datos
-
         # manejar dentro de bloque try catch todo dentro del DAO
-        public function Add(Reservation $reservation)
+        public function add(Reservation $reservation)
         {
-            $query = "CALL reservation_add(?, ?, ?, ?, ?)";
+            try {
+                $query = "CALL reservation_add(?, ?, ?, ?, ?)";
             
-            $parameters["id_owner"] = $reservation->getIdOwner();
-            $parameters["id_pet"] = $reservation->getIdPet();
-            $parameters["id_keeper"] = $reservation->getIdKeeper();
-            $parameters["price"] = $reservation->getPrice();
-            $parameters["id_date_range"] = $reservation->getIdDate();
-            
-            $this->connection = Connection::GetInstance();
+                $parameters["id_owner"] = $reservation->getIdOwner();
+                $parameters["id_pet"] = $reservation->getIdPet();
+                $parameters["id_keeper"] = $reservation->getIdKeeper();
+                $parameters["price"] = $reservation->getPrice();
+                $parameters["id_date_range"] = $reservation->getIdDate();
+                
+                $this->connection = Connection::GetInstance();
 
-            $this->connection->ExecuteNonQuery($query, $parameters, QueryType::StoredProcedure);  
+                $this->connection->ExecuteNonQuery($query, $parameters, QueryType::StoredProcedure);  
+            } catch (Exception $ex) {
+                //throw $th;
+            }
+            
             
         }
 

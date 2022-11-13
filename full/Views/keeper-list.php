@@ -50,7 +50,9 @@ include('nav-bar-owner.php');
             <p class="card-text">&#9742; <?php echo $keeper->getPhone() ?></p>
             <p class="card-text">&#128231; <?php echo $keeper->getEmail() ?></p>
             <p class="card-text">&#127968; <?php echo $keeper->getAddress() ?></p>
-            <a href="#" class="btn btn-success stretched-link">Make a reservation</a>
+            <a href="<?php echo FRONT_ROOT."reservation/showAddView?
+               start_date=".$start_date."&end_date=".$end_date."&id_keeper=".$keeper->getId()?>" 
+               class="btn btn-success stretched-link">Make a reservation</a>
           </div>
           <div class="card-footer">
             <?php
