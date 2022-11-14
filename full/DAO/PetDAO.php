@@ -72,15 +72,19 @@
             return $petList;
         }
 
-        public function Remove($id_pet)
-        {            
-            $query = "CALL pet_remove(?)";
+        public function Remove($id_pet) {
+            try {
+                $query = "CALL pet_remove(?)";
 
-            $parameters["id_pet"] =  $id_pet;
+                $parameters["id_pet"] =  $id_pet;
 
-            $this->connection = Connection::GetInstance();
+                $this->connection = Connection::GetInstance();
 
-            $this->connection->ExecuteNonQuery($query, $parameters, QueryType::StoredProcedure);
+                $this->connection->ExecuteNonQuery($query, $parameters, QueryType::StoredProcedure);
+
+            } catch (Exception $ex) {
+                //throw $th;
+            }  
         }
 
         public function getById($id_pet)

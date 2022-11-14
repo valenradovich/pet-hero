@@ -52,12 +52,12 @@
         }
         
 
-        public function Remove($id_date)
+        public function Remove($id_dateRange)
         {            
             # crear funcion sql
             $query = "CALL dates_remove(?)";
 
-            $parameters["id_dateRange"] = $id_date;
+            $parameters["id_dateRange"] = $id_dateRange;
 
             $this->connection = Connection::GetInstance();
 
@@ -77,7 +77,7 @@
             foreach ($result as $row)
             {
                 $date = new Date();
-                $date->setIdDate($row["id_daterange"]);
+                $date->setIdDate($row["id_dateRange"]);
                 $date->setStartDate($row["start_date"]);
                 $date->setEndDate($row["end_date"]);
                 $date->setIdUser($row["id_user"]);
@@ -101,7 +101,7 @@
             foreach ($result as $row)
             {
                 $date = new Date();
-                $date->setIdDate($row["id_daterange"]);
+                $date->setIdDate($row["id_dateRange"]);
                 $date->setStartDate($row["start_date"]);
                 $date->setEndDate($row["end_date"]);
                 $date->setIdUser($row["id_user"]);
@@ -127,7 +127,7 @@
             foreach ($result as $row)
             {
                 $date = new Date();
-                $date->setIdDate($row["id_daterange"]);
+                $date->setIdDate($row["id_dateRange"]);
                 $date->setStartDate($row["start_date"]);
                 $date->setEndDate($row["end_date"]);
                 $date->setIdUser($row["id_user"]);

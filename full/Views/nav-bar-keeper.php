@@ -55,6 +55,14 @@
           </a>
         </li>
         <li class="nav-item text-center mx-2 mx-lg-1">
+          <a class="nav-link" href="<?php echo FRONT_ROOT."spec/show_add_view "?>" style= color:#198754;>
+            <div>
+              <span style= color:grey; class="material-symbols-outlined">info</span>  
+            </div>
+            Add Specs
+          </a>
+        </li>
+        <li class="nav-item text-center mx-2 mx-lg-1">
           <a class="nav-link" href="<?php echo  FRONT_ROOT."keeper/logout "?>" style= color:#198754;>
             <div>
               <span style= color:grey; class="material-symbols-outlined">logout</span>  

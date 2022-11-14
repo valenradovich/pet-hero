@@ -145,7 +145,7 @@
 
                 foreach($result as $row)
                 {
-                    $date = $row["start_date"] . " , " . $row["end_date"];
+                    $date = $row["start_date"] . " to " . $row["end_date"];
                 }
 
                 return $date;

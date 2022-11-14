@@ -55,9 +55,9 @@
             
         }
 
-        public function Remove($id_date)
+        public function Remove($id_dateRange)
         {
-            $this->dateDAO->Remove($id_date);
+            $this->dateDAO->Remove($id_dateRange);
 
             $this->ShowListView();
         }

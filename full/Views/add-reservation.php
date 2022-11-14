@@ -7,10 +7,10 @@
   <div class="container py-5">
     <div class="row">
     <h3 class="mb-4 pb-2 pb-md-0 mb-md-5">&#8505;Full information about the Keeper!</h3>
-            <?php
-              foreach ($keeperList as $keeper) {
-                if($keeper->getId() == $_GET['id_keeper']){
-            ?>
+    <?php
+      foreach ($keeperList as $keeper) {
+        if($keeper->getId() == $_GET['id_keeper']){
+    ?>
       <div class="col-lg-8">
         <div class="card mb-4">
           <div class="card-body">
@@ -69,74 +69,6 @@
             </div>
           </div>
         </div>
-        <div class="row">
-          <div class="col-md-6">
-            <div class="card mb-4 mb-md-0">
-              <div class="card-body">
-                <p class="mb-4"><span class="text-primary font-italic me-1">assigment</span> Project Status
-                </p>
-                <p class="mb-1" style="font-size: .77rem;">Web Design</p>
-                <div class="progress rounded" style="height: 5px;">
-                  <div class="progress-bar" role="progressbar" style="width: 80%" aria-valuenow="80"
-                    aria-valuemin="0" aria-valuemax="100"></div>
-                </div>
-                <p class="mt-4 mb-1" style="font-size: .77rem;">Website Markup</p>
-                <div class="progress rounded" style="height: 5px;">
-                  <div class="progress-bar" role="progressbar" style="width: 72%" aria-valuenow="72"
-                    aria-valuemin="0" aria-valuemax="100"></div>
-                </div>
-                <p class="mt-4 mb-1" style="font-size: .77rem;">One Page</p>
-                <div class="progress rounded" style="height: 5px;">
-                  <div class="progress-bar" role="progressbar" style="width: 89%" aria-valuenow="89"
-                    aria-valuemin="0" aria-valuemax="100"></div>
-                </div>
-                <p class="mt-4 mb-1" style="font-size: .77rem;">Mobile Template</p>
-                <div class="progress rounded" style="height: 5px;">
-                  <div class="progress-bar" role="progressbar" style="width: 55%" aria-valuenow="55"
-                    aria-valuemin="0" aria-valuemax="100"></div>
-                </div>
-                <p class="mt-4 mb-1" style="font-size: .77rem;">Backend API</p>
-                <div class="progress rounded mb-2" style="height: 5px;">
-                  <div class="progress-bar" role="progressbar" style="width: 66%" aria-valuenow="66"
-                    aria-valuemin="0" aria-valuemax="100"></div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="col-md-6">
-            <div class="card mb-4 mb-md-0">
-              <div class="card-body">
-                <p class="mb-4"><span class="text-primary font-italic me-1">assigment</span> Project Status
-                </p>
-                <p class="mb-1" style="font-size: .77rem;">Web Design</p>
-                <div class="progress rounded" style="height: 5px;">
-                  <div class="progress-bar" role="progressbar" style="width: 80%" aria-valuenow="80"
-                    aria-valuemin="0" aria-valuemax="100"></div>
-                </div>
-                <p class="mt-4 mb-1" style="font-size: .77rem;">Website Markup</p>
-                <div class="progress rounded" style="height: 5px;">
-                  <div class="progress-bar" role="progressbar" style="width: 72%" aria-valuenow="72"
-                    aria-valuemin="0" aria-valuemax="100"></div>
-                </div>
-                <p class="mt-4 mb-1" style="font-size: .77rem;">One Page</p>
-                <div class="progress rounded" style="height: 5px;">
-                  <div class="progress-bar" role="progressbar" style="width: 89%" aria-valuenow="89"
-                    aria-valuemin="0" aria-valuemax="100"></div>
-                </div>
-                <p class="mt-4 mb-1" style="font-size: .77rem;">Mobile Template</p>
-                <div class="progress rounded" style="height: 5px;">
-                  <div class="progress-bar" role="progressbar" style="width: 55%" aria-valuenow="55"
-                    aria-valuemin="0" aria-valuemax="100"></div>
-                </div>
-                <p class="mt-4 mb-1" style="font-size: .77rem;">Backend API</p>
-                <div class="progress rounded mb-2" style="height: 5px;">
-                  <div class="progress-bar" role="progressbar" style="width: 66%" aria-valuenow="66"
-                    aria-valuemin="0" aria-valuemax="100"></div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
       </div>
       <div class="col-lg-4">
         <div class="card mb-4">
@@ -146,37 +78,149 @@
               class="rounded-circle img-fluid" style="width: 150px;">
             </div>
             <h5 class="my-3">Specifications:</h5>
-            <p class="text-muted mb-1"><?php echo $_SESSION["loggedUser"]["user_type_string"]?> of Pets</p>
-            <p class="text-muted mb-4"><?php echo $_SESSION["loggedUser"]["live_place"]?></p>
-            <div class="d-flex justify-content-center mb-2">
-              <button type="button" class="btn btn-primary">Edit Profile</button>
-            </div>
-          </div>
-        </div>
-        <div class="card mb-4 mb-lg-0">
-          <div class="card-body p-0">
-            <ul class="list-group list-group-flush rounded-3">
-              <li class="list-group-item d-flex justify-content-between align-items-center p-3">  
-                <a href=""<?php echo FRONT_ROOT."date/showlistview "?>>
-                <button class="mb-0 btn btn-dark">&#128467; My dates</button>
-                </a>
-              </li>
-              <li class="list-group-item d-flex justify-content-between align-items-center p-3">
-                <i class="fab fa-twitter fa-lg" style="color: #55acee;"></i>
-                <p class="mb-0">-</p>
-              </li>
-              <li class="list-group-item d-flex justify-content-between align-items-center p-3">
-                <i class="fab fa-instagram fa-lg" style="color: #ac2bac;"></i>
-                <p class="mb-0">-</p>
-              </li>
-              <li class="list-group-item d-flex justify-content-between align-items-center p-3">
-                <i class="fab fa-facebook-f fa-lg" style="color: #3b5998;"></i>
-                <p class="mb-0">-</p>
-              </li>
-            </ul>
+            <?php 
+              foreach($specList as $spec) {
+                if ($spec->getIdKeeper() == $keeper->getId()) {
+            ?>
+            <div>
+              <p class="mb-0">Price per day:</p>
+              <p class="text-muted mb-2">$<?php echo $spec->getPricePerDay()?></p>
+            </div> 
+            <div>
+              <p class="mb-0">Size of pets:</p>
+              <p class="text-muted mb-2"><?php echo $spec->getPetSizeString()?></p>
+            </div> 
+            <?php
+                }
+              }
+            ?>
+            <?php
+              foreach ($dateList as $date) {
+                if($date->getIdUser() == $keeper->getId()){
+            ?>
+            <div>
+              <p class="mb-0">Dates:</p>
+              <p class="text-muted mb-2"><?php echo $date->getStartDate()?> to <?php echo $date->getEndDate()?></p>
+            </div> 
+            <?php
+                }
+              }
+            ?>
           </div>
         </div>
       </div>
+      <form action="<?php echo FRONT_ROOT . "reservation/add" ?>" method="post">
+      <div class="col-lg">
+      <h3 class="mb-4 pb-2 pb-md-0 mb-md-5">&#128221;Check the form to send your reservation!</h3>
+        <div class="card mb-4">
+          <div class="card-body">
+            <div class="row">
+              <div class="col-sm-3">
+                <p class="mb-0">Pet</p>
+              </div>
+              <div class="col-sm-9">
+                <select class="form-select" name= "id_pet" required>
+                <?php
+                  foreach($petList as $pet) {
+                    if ($pet->getIdOwner() == $_SESSION['loggedUser']['id']) {
+                ?>
+                  <option selected value="<?php echo $pet->getId()?>"><?php echo $pet->getName()?></option>
+                <?php
+                    }
+                  }
+                ?>
+                </select>  
+              </div>
+            </div>
+            <hr>
+            <div class="row">
+              <div class="col-sm-3">
+                <p class="mb-0">Price per day</p>
+              </div>
+              <div class="col-sm-9">
+                <select class="form-select" name="price" required>
+                <?php
+                  foreach($specList as $spec) {
+                    if ($spec->getIdKeeper() == $keeper->getId()) {
+                ?>
+                <option selected value="<?php echo $spec->getPricePerDay() ?>">
+                  $<?php echo $spec->getPricePerDay() ?>
+                </option>
+                <?php
+                    }
+                  }
+                ?>
+                </select>
+              </div>
+            </div>
+            <hr>
+            <div class="row">
+              <div class="col-sm-3">
+                <p class="mb-0">Keeper's name</p>
+              </div>
+              <div class="col-sm-9">
+                <select class="form-select" name="id_keeper" required>
+                  <option selected value="<?php echo $keeper->getId() ?>"><?php echo $keeper->getFullname() ?></option>
+                </select>
+              </div>
+            </div>
+            <hr>
+            <div class="row">
+            <?php
+              foreach ($dateList as $date) {
+                if($date->getIdUser() == $keeper->getId()){
+            ?>
+              <div class="col-sm-3">
+                <p class="mb-0">Keeper's date range</p>
+              </div>
+            <?php
+                }
+              }
+            ?>
+              <div class="col-sm-9">
+                <select class="form-select" name="id_date">
+                <option selected value="<?php echo $date->getIdDate() ?>">
+                  <?php echo $date->getStartDate()?> to <?php echo $date->getEndDate()?>
+                </option>
+                </select>
+              </div>
+            </div>
+            <hr>
+            <div class="row">
+              <div class="col-sm-3">
+                <p class="mb-0">Start Pet Stay</p>
+              </div>
+              <div class="col-sm-9">
+                <select class="form-select" name="start_date">
+                <option selected value="<?php echo $_GET['start_date'] ?>">
+                  <?php echo $_GET['start_date'] ?>
+                </option>
+                </select>
+              </div>
+            </div>
+            <hr>
+            <div class="row">
+              <div class="col-sm-3">
+                <p class="mb-0">End Pet Stay</p>
+              </div>
+              <div class="col-sm-9">
+                <select class="form-select" name="end_date">
+                <option selected value="<?php echo $_GET['end_date'] ?>">
+                  <?php echo $_GET['end_date'] ?>
+                </option>
+                </select>
+              </div>
+            </div>
+            <hr>
+            <div class="row">
+            <div class="d-flex justify-content-center mb-2">
+              <button type="submit" class="btn btn-success">Confirm Reservation&#128512;</button>
+            </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      </form>
       <?php
                 }
               }

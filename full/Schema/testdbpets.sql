@@ -464,5 +464,92 @@ END$$
 
 DELIMITER ;
 
+DROP PROCEDURE IF EXISTS `reservation_get_by_id_owner`;
+
+DELIMITER $$
+
+CREATE PROCEDURE reservation_get_by_id_user (IN id INT)
+BEGIN
+    SELECT reservations.id_reservation, reservations.id_owner, reservations.id_pet, reservations.id_keeper, 
+           reservations.price, reservations.id_date
+    FROM reservations
+    WHERE (reservations.id_owner = id);
+END$$
+
+DELIMITER ;
+
+DROP PROCEDURE IF EXISTS `reservation_get_by_id_keeper`;
+
+DELIMITER $$
+
+CREATE PROCEDURE reservation_get_by_id_user (IN id INT)
+BEGIN
+    SELECT reservations.id_reservation, reservations.id_owner, reservations.id_pet, reservations.id_keeper, 
+           reservations.price, reservations.id_date
+    FROM reservations
+    WHERE (reservations.id_keeper = id);
+END$$
+
+DELIMITER ;
+
+DROP PROCEDURE IF EXISTS `specifications_add`;
+
+DELIMITER $$
+
+CREATE PROCEDURE specifications_add (IN id_size_of_pets INT, IN price_per_day INT)
+BEGIN
+    INSERT INTO specifications
+        (specifications.id_size_of_pets, specifications.price_per_day)
+    VALUES
+        (id_size_of_pets, price_per_day);
+END$$
+
+DELIMITER ;
+
+DROP PROCEDURE IF EXISTS `specifications_get_all`;
+
+DELIMITER $$
+
+CREATE PROCEDURE specifications_get_all ()
+BEGIN
+    SELECT specifications.id_specification, specifications.id_keeper, specifications.id_size_of_pets, 
+           specifications.price_per_day
+    FROM specifications;
+END$$
+
+DELIMITER ;
+
+DROP PROCEDURE IF EXISTS `specifications_get_by_id`;
+
+DELIMITER $$
+
+CREATE PROCEDURE specifications_get_by_id (IN id INT)
+BEGIN
+    SELECT specifications.id_specification, specifications.id_keeper, specifications.id_size_of_pets, 
+           specifications.price_per_day
+    FROM specifications
+    WHERE (specifications.id_specification = id);
+END$$
+
+DELIMITER ;
+
+DROP PROCEDURE IF EXISTS `specifications_remove`;
+
+DELIMITER $$
+
+CREATE PROCEDURE specifications_remove (IN id INT)
+BEGIN
+    DELETE 
+    FROM specifications
+    WHERE (specifications.id_specification = id);
+END$$
+
+DELIMITER ;
+
+
+
+
+
+
 
 

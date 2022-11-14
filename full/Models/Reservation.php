@@ -7,9 +7,11 @@
         private $id_pet;
         private $id_keeper;
         private $price;
-        private $id_date_range;
+        private $id_date;
         private $status;
         private $order_date;
+        private $start_date;
+        private $end_date;
 
         public function getIdReservation() {
             return $this->id_reservation;
@@ -52,11 +54,11 @@
         }
 
         public function getIdDate() {
-            return $this->id_date_range;
+            return $this->id_date;
         }
 
-        public function setIdDate($id_date_range) {
-            $this->id_date_range = $id_date_range;
+        public function setIdDate($id_date) {
+            $this->id_date = $id_date;
         }
 
         public function getStatus() {
@@ -73,6 +75,26 @@
 
         public function setOrderDate($order_date) {
             $this->order_date = $order_date;
+        }
+
+        public function getStartDate() {
+            return $this->start_date;
+        }
+
+        public function setStartDate($start_date) {
+            $this->start_date = $start_date;
+        }
+
+        public function getEndDate() {
+            return $this->end_date;
+        }
+
+        public function setEndDate($end_date) {
+            $this->end_date = $end_date;
+        }
+
+        public function getDateRange() {
+            return $this->start_date . ' to ' . $this->end_date;
         }
     }
 

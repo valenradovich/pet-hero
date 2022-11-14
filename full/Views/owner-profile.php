@@ -3,8 +3,6 @@
 
   include('nav-bar-owner.php');
 
-  # session_start();
-
   require_once("validate-session.php");
 
 ?>
@@ -105,72 +103,47 @@
             </div>
           </div>
         </div>
-        <div class="row">
-          <div class="col-md-6">
-            <div class="card mb-4 mb-md-0">
-              <div class="card-body">
-                <p class="mb-4"><span class="text-primary font-italic me-1">assigment</span> Project Status
-                </p>
-                <p class="mb-1" style="font-size: .77rem;">Web Design</p>
-                <div class="progress rounded" style="height: 5px;">
-                  <div class="progress-bar" role="progressbar" style="width: 80%" aria-valuenow="80"
-                    aria-valuemin="0" aria-valuemax="100"></div>
-                </div>
-                <p class="mt-4 mb-1" style="font-size: .77rem;">Website Markup</p>
-                <div class="progress rounded" style="height: 5px;">
-                  <div class="progress-bar" role="progressbar" style="width: 72%" aria-valuenow="72"
-                    aria-valuemin="0" aria-valuemax="100"></div>
-                </div>
-                <p class="mt-4 mb-1" style="font-size: .77rem;">One Page</p>
-                <div class="progress rounded" style="height: 5px;">
-                  <div class="progress-bar" role="progressbar" style="width: 89%" aria-valuenow="89"
-                    aria-valuemin="0" aria-valuemax="100"></div>
-                </div>
-                <p class="mt-4 mb-1" style="font-size: .77rem;">Mobile Template</p>
-                <div class="progress rounded" style="height: 5px;">
-                  <div class="progress-bar" role="progressbar" style="width: 55%" aria-valuenow="55"
-                    aria-valuemin="0" aria-valuemax="100"></div>
-                </div>
-                <p class="mt-4 mb-1" style="font-size: .77rem;">Backend API</p>
-                <div class="progress rounded mb-2" style="height: 5px;">
-                  <div class="progress-bar" role="progressbar" style="width: 66%" aria-valuenow="66"
-                    aria-valuemin="0" aria-valuemax="100"></div>
-                </div>
-              </div>
+        <div class="card mb-4">
+          <div class="card-body">
+            <div class="row">
+            <h5 class="my-3">&#128229;Your Reservations</h5>
             </div>
-          </div>
-          <div class="col-md-6">
-            <div class="card mb-4 mb-md-0">
-              <div class="card-body">
-                <p class="mb-4"><span class="text-primary font-italic me-1">assigment</span> Project Status
-                </p>
-                <p class="mb-1" style="font-size: .77rem;">Web Design</p>
-                <div class="progress rounded" style="height: 5px;">
-                  <div class="progress-bar" role="progressbar" style="width: 80%" aria-valuenow="80"
-                    aria-valuemin="0" aria-valuemax="100"></div>
+            <?php
+              foreach($reservationList as $reservation) {
+                if ($reservation->getIdOwner() == $_SESSION["loggedUser"]["id"]) { 
+                  foreach($keeperList as $keeper) {
+                    if ($keeper->getId() == $reservation->getIdKeeper()) {
+                      foreach($petList as $pet) {
+                        if ($pet->getId() == $reservation->getIdPet()) {
+                    
+            ?>
+            <ul class="list-group list-group-light">
+              <li class="list-group-item d-flex justify-content-between align-items-center">
+                <div class="d-flex align-items-center">
+                <img src="<?php echo UPLOADS_PATH.$keeper->getPhoto()?>" class="rounded-circle" alt=""
+                      style="width: 120px; height: 120px" />
+                  <div class="ms-3">
+                    <p class="fw-bold mb-1"><?php echo $keeper->getFullName()?></p>
+                    <p class="text-muted mb-0">&#128231;<?php echo $keeper->getEmail()?></p>
+                    <p class="text-muted mb-0">&#128222;<?php echo $keeper->getPhone()?></p>
+                    <p class="text-muted mb-0">&#128197;<?php echo $reservation->getDateRange()?></p>
+                    <div class="d-flex justify-content-center mt-3">
+                      <a href="#" type="button" class ="btn btn-dark">Message</a>
+                    </div>
+                  </div>
                 </div>
-                <p class="mt-4 mb-1" style="font-size: .77rem;">Website Markup</p>
-                <div class="progress rounded" style="height: 5px;">
-                  <div class="progress-bar" role="progressbar" style="width: 72%" aria-valuenow="72"
-                    aria-valuemin="0" aria-valuemax="100"></div>
-                </div>
-                <p class="mt-4 mb-1" style="font-size: .77rem;">One Page</p>
-                <div class="progress rounded" style="height: 5px;">
-                  <div class="progress-bar" role="progressbar" style="width: 89%" aria-valuenow="89"
-                    aria-valuemin="0" aria-valuemax="100"></div>
-                </div>
-                <p class="mt-4 mb-1" style="font-size: .77rem;">Mobile Template</p>
-                <div class="progress rounded" style="height: 5px;">
-                  <div class="progress-bar" role="progressbar" style="width: 55%" aria-valuenow="55"
-                    aria-valuemin="0" aria-valuemax="100"></div>
-                </div>
-                <p class="mt-4 mb-1" style="font-size: .77rem;">Backend API</p>
-                <div class="progress rounded mb-2" style="height: 5px;">
-                  <div class="progress-bar" role="progressbar" style="width: 66%" aria-valuenow="66"
-                    aria-valuemin="0" aria-valuemax="100"></div>
-                </div>
-              </div>
-            </div>
+                <span class="badge bg-warning text-dark"><?php echo $reservation->getStatus()?></span>
+              </li>
+                <!--<span class="badge rounded-pill badge-warning">Awaiting</span>-->
+            </ul>
+            <?php
+                  }
+                }
+              }
+            }
+          }
+         }
+            ?>
           </div>
         </div>
       </div>

@@ -16,19 +16,23 @@
         public function add(Reservation $reservation)
         {
             try {
-                $query = "CALL reservation_add(?, ?, ?, ?, ?)";
-            
+                $query = "CALL reservation_add(?, ?, ?, ?, ?, ?, ?, ?)";
+
                 $parameters["id_owner"] = $reservation->getIdOwner();
                 $parameters["id_pet"] = $reservation->getIdPet();
                 $parameters["id_keeper"] = $reservation->getIdKeeper();
                 $parameters["price"] = $reservation->getPrice();
-                $parameters["id_date_range"] = $reservation->getIdDate();
-                
+                $parameters["id_date"] = $reservation->getIdDate();
+                $parameters["status"] = $reservation->getStatus();
+                $parameters["start_date"] = $reservation->getStartDate();
+                $parameters["end_date"] = $reservation->getEndDate();
+
                 $this->connection = Connection::GetInstance();
 
-                $this->connection->ExecuteNonQuery($query, $parameters, QueryType::StoredProcedure);  
+                $this->connection->ExecuteNonQuery($query, $parameters, QueryType::StoredProcedure); 
+
             } catch (Exception $ex) {
-                //throw $th;
+                echo 'error';
             }
             
             
@@ -38,7 +42,7 @@
         {
             $reservationList = array();
 
-            $query = "CALL reservations_get_all()";
+            $query = "CALL reservation_get_all()";
 
             $this->connection = Connection::GetInstance();
 
@@ -52,9 +56,11 @@
                 $reservation->setIdPet($row["id_pet"]);
                 $reservation->setIdKeeper($row["id_keeper"]);
                 $reservation->setPrice($row["price"]);
-                $reservation->setIdDate($row["id_date_range"]);
+                $reservation->setIdDate($row["id_date"]);
                 $reservation->setStatus($row["status"]);
                 $reservation->setOrderDate($row["order_date"]);
+                $reservation->setStartDate($row["start_date"]);
+                $reservation->setEndDate($row["end_date"]);
 
                 array_push($reservationList, $reservation);
             }
@@ -92,9 +98,11 @@
                 $reservation->setIdPet($row["id_pet"]);
                 $reservation->setIdKeeper($row["id_keeper"]);
                 $reservation->setPrice($row["price"]);
-                $reservation->setIdDate($row["id_date_range"]);
+                $reservation->setIdDate($row["id_date"]);
                 $reservation->setStatus($row["status"]);
                 $reservation->setOrderDate($row["order_date"]);
+                $reservation->setStartDate($row["start_date"]);
+                $reservation->setEndDate($row["end_date"]);
             }
 
             return $reservation;

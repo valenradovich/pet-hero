@@ -7,6 +7,7 @@
     use DAO\ProvinceDAO as ProvinceDAO;
     use DAO\CityDAO as CityDAO;
     use DAO\DateDAO as DateDAO;
+    use DAO\SpecDAO as SpecDAO;
     use DAO\ReservationDAO as ReservationDAO;
 
     use Exception;
@@ -21,6 +22,7 @@
             $this->provinceDAO = new ProvinceDAO();
             $this->cityDAO = new CityDAO();
             $this->dateDAO = new DateDAO();
+            $this->specDAO = new SpecDAO();
             $this->reservationDAO = new ReservationDAO();
         }
 
@@ -99,6 +101,7 @@
         {
             $keeperList = $this->keeperDAO->getAll();
             $dateList = $this->dateDAO->getAll();
+            $specList = $this->specDAO->getAll();
             # $reservationList = $this->reservationDAO->getAll();
 
             require_once(VIEWS_PATH."validate-session.php");
@@ -106,6 +109,8 @@
         }
 
         public function keeperprofile() {
+            $specList = $this->specDAO->getAll();
+            $dateList = $this->dateDAO->getAll();
             require_once(VIEWS_PATH."validate-session.php");
             require_once(VIEWS_PATH."keeper-profile.php");
         }

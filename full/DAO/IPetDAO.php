@@ -3,8 +3,7 @@
 
     use Models\Pet as Pet;
 
-    interface IPetDAO
-    {
+    interface IPetDAO {
         function Add(Pet $pet);
         function GetAll();
         function Remove($id_pet);
