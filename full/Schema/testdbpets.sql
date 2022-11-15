@@ -546,6 +546,20 @@ END$$
 
 DELIMITER ;
 
+DROP PROCEDURE IF EXISTS `reservations_update`;
+
+DELIMITER $$
+
+CREATE PROCEDURE reservations_update (IN statusP VARCHAR(20), IN id INT)
+BEGIN
+    UPDATE reservations
+    SET reservations.status = statusP
+    WHERE (reservations.id_reservation = id);  
+END$$
+
+DELIMITER ;
+                                    
+
 
 
 

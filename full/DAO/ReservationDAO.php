@@ -20,10 +20,10 @@
 
                 $parameters["id_owner"] = $reservation->getIdOwner();
                 $parameters["id_pet"] = $reservation->getIdPet();
+                $parameters["id_breed"] = $reservation->getIdBreed();
                 $parameters["id_keeper"] = $reservation->getIdKeeper();
                 $parameters["price"] = $reservation->getPrice();
                 $parameters["id_date"] = $reservation->getIdDate();
-                $parameters["status"] = $reservation->getStatus();
                 $parameters["start_date"] = $reservation->getStartDate();
                 $parameters["end_date"] = $reservation->getEndDate();
 
@@ -33,9 +33,7 @@
 
             } catch (Exception $ex) {
                 echo 'error';
-            }
-            
-            
+            }     
         }
 
         public function GetAll()
@@ -54,6 +52,7 @@
                 $reservation->setIdReservation($row["id_reservation"]);
                 $reservation->setIdOwner($row["id_owner"]);
                 $reservation->setIdPet($row["id_pet"]);
+                $reservation->setIdBreed($row["id_breed"]);
                 $reservation->setIdKeeper($row["id_keeper"]);
                 $reservation->setPrice($row["price"]);
                 $reservation->setIdDate($row["id_date"]);
@@ -96,6 +95,7 @@
                 $reservation->setIdReservation($row["id_reservation"]);
                 $reservation->setIdOwner($row["id_owner"]);
                 $reservation->setIdPet($row["id_pet"]);
+                $reservation->setIdBreed($row["id_breed"]);
                 $reservation->setIdKeeper($row["id_keeper"]);
                 $reservation->setPrice($row["price"]);
                 $reservation->setIdDate($row["id_date"]);
@@ -107,6 +107,63 @@
 
             return $reservation;
 
+        }
+
+        public function Update($id, $status) {
+            try {
+                $query = "CALL reservations_update(?, ?)";
+
+                $parameters["id_reservation"] = $id;
+                $parameters["status"] = $status;
+
+                $this->connection = Connection::GetInstance();
+
+                $this->connection->ExecuteNonQuery($query, $parameters, QueryType::StoredProcedure);
+                
+            } catch (Exception $ex) {
+                //throw $th;
+            }
+
+            
+        }
+
+        public function validation($id_keeper, $id_date) {
+            try {
+                $reservationList = array();
+
+                $query = "CALL reservations_by_idk_idDate_status(?, ?, ?)";
+
+                $parameters["id_keeper"] = $id_keeper;
+                $parameters["id_date"] = $id_date;
+                $parameters["status"] = "accepted";
+
+                $this->connection = Connection::GetInstance();
+
+                $result = $this->connection->Execute($query, $parameters, QueryType::StoredProcedure);
+
+                foreach ($result as $row)
+                {
+                    $reservation = new Reservation();
+                    $reservation->setIdReservation($row["id_reservation"]);
+                    $reservation->setIdOwner($row["id_owner"]);
+                    $reservation->setIdPet($row["id_pet"]);
+                    $reservation->setIdBreed($row["id_breed"]);
+                    $reservation->setIdKeeper($row["id_keeper"]);
+                    $reservation->setPrice($row["price"]);
+                    $reservation->setIdDate($row["id_date"]);
+                    $reservation->setStatus($row["status"]);
+                    $reservation->setOrderDate($row["order_date"]);
+                    $reservation->setStartDate($row["start_date"]);
+                    $reservation->setEndDate($row["end_date"]);
+    
+                    array_push($reservationList, $reservation);
+                }
+    
+                return $reservationList;
+                
+            } catch (Exception $ex) {
+                echo 'error en validation db reservation';
+            }
         }
     }
 

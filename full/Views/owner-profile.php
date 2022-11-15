@@ -128,13 +128,21 @@
                     <p class="text-muted mb-0">&#128222;<?php echo $keeper->getPhone()?></p>
                     <p class="text-muted mb-0">&#128197;<?php echo $reservation->getDateRange()?></p>
                     <div class="d-flex justify-content-center mt-3">
-                      <a href="#" type="button" class ="btn btn-dark">Message</a>
+                      <a href="#" type="button" class ="btn btn-dark">&#9993;</a>
                     </div>
                   </div>
                 </div>
-                <span class="badge bg-warning text-dark"><?php echo $reservation->getStatus()?></span>
+                <?php 
+                  if($reservation->getStatus() == "awaiting response") { ?>
+                    <span class="badge bg-warning rounded-pill text-dark"><?php echo $reservation->getStatus()?></span>
+                <?php } else if($reservation->getStatus() == "accepted") { ?>
+                    <span class="badge bg-success rounded-pill text-dark"><?php echo $reservation->getStatus()?></span>
+                <?php } else if($reservation->getStatus() == "rejected") { ?>
+                    <span class="badge bg-danger rounded-pill text-dark"><?php echo $reservation->getStatus()?></span>                
               </li>
-                <!--<span class="badge rounded-pill badge-warning">Awaiting</span>-->
+              <?php
+                }
+              ?>              
             </ul>
             <?php
                   }

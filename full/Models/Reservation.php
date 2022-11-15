@@ -5,6 +5,7 @@
         private $id_reservation;
         private $id_owner;
         private $id_pet;
+        private $id_breed;
         private $id_keeper;
         private $price;
         private $id_date;
@@ -35,6 +36,14 @@
 
         public function setIdPet($id_pet) {
             $this->id_pet = $id_pet;
+        }
+
+        public function getIdBreed() {
+            return $this->id_breed;
+        }
+
+        public function setIdBreed($id_breed) {
+            $this->id_breed = $id_breed;
         }
 
         public function getIdKeeper() {

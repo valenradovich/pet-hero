@@ -18,6 +18,7 @@
             <p class="text-muted mb-0"><?php echo $pet->getPetTypeString() ?></p>
             <p class="text-muted mb-0"></p>
             <p class="text-muted mb-0">&#128209; <?php echo $pet->getDescription() ?></p>
+            <p class="text-muted mb-0"><?php echo $pet->getBreed() ?></p>
           </div>
         </div>
         <button type="submit" name="id_pet" class="btn btn-dark" value="<?php echo $pet->getId() ?>"> Remove </button>

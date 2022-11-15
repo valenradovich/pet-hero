@@ -48,7 +48,7 @@
             foreach($result as $row)
             {
                 $owner = new Owner();
-                $owner->setId($row["id_owner"]);
+                $owner->setId($row["id_user"]);
                 $owner->setFirstName($row["first_name"]);
                 $owner->setLastName($row["last_name"]);
                 $owner->setPassword($row["password"]);

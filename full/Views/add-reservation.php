@@ -173,10 +173,6 @@
               <div class="col-sm-3">
                 <p class="mb-0">Keeper's date range</p>
               </div>
-            <?php
-                }
-              }
-            ?>
               <div class="col-sm-9">
                 <select class="form-select" name="id_date">
                 <option selected value="<?php echo $date->getIdDate() ?>">
@@ -184,6 +180,10 @@
                 </option>
                 </select>
               </div>
+              <?php
+                }
+              }
+            ?>
             </div>
             <hr>
             <div class="row">
@@ -228,100 +228,6 @@
     </div>
   </div>
 </section>
-<!--<section class="vh-100 bg-secondary responsive">
-  <div class="container p-3 h-100">
-    <div class="row justify-content-center align-items-center h-100">
-      <div class="col-12 col-lg-9 col-xl-7">
-        <div class="card shadow-2-strong card-registration" style="border-radius: 15px;">
-          <div class="card-body p-4 p-md-5">
-
-            <h3 class="mb-4 pb-2 pb-md-0 mb-md-5">Full information about the Keeper!</h3>
-            <?php
-              foreach ($keeperList as $keeper) {
-                if($keeper->getId() == $_GET['id_keeper']){
-            ?>
-              <form action="<?php echo  FRONT_ROOT."reservation/add" ?>" method="post" enctype="multipart/form-data">
-                <div class="row">
-                  <div class="col-md-6 mb-4">
-                    <div class="form-outline">
-                      <label class="form-label" for="name_pet">Name: <?php echo $keeper->getFullName() ?></label>
-                    </div>
-                  </div>
-                  <div class="col-md-6 mb-4">
-                    <div class="form-outline">
-                      <label class="form-label" for="photo">Date Range: <?php echo $keeper->getDateRange()?></label>
-                    </div>
-                  </div>
-                </div>
-                <div class="row">
-                  <div class="col-md-6 mb-5 d-flex align-items-center">
-                    <select class="form-select" name= "id_breed" required>
-                      <option selected disabled>Select a Breed</option>
-                      <option value="1">Subject 1</option>
-                      <option value="2">Subject 2</option>
-                      <option value="3">Subject 3</option>
-                    </select>              
-                  </div>         
-                  <div class="col-md-6 mb-4">
-                    <div class="form-check form-check-inline">
-                      <input class="form-check-input" type="radio" name="id_size" id="id_size"
-                        value="1" checked />
-                      <label class="form-check-label" for="id_size">Small</label>
-                    </div>
-
-                    <div class="form-check form-check-inline">
-                      <input class="form-check-input" type="radio" name="id_size" id="id_size"
-                        value="2" />
-                      <label class="form-check-label" for="id_size">Medium</label>
-                    </div>
-
-                    <div class="form-check form-check-inline">
-                      <input class="form-check-input" type="radio" name="id_size" id="id_size"
-                        value="3" />
-                      <label class="form-check-label" for="id_size">Large</label>
-                    </div>
-
-                  </div>
-
-                <div class="row">
-                  <div class="col-md-6 mb-4 pb-2">
-                  <div class="form-outline">
-                      <input type="file" class="form-control form-label" id="vaccines" name ="vaccines" 
-                      required/>
-                      <label class="form-label" for="vaccines">Vaccines photo</label>
-                    </div>
-
-                  </div>
-                  <div class="col-md-6 mb-4 pb-2">
-                    <div class="form-outline">
-                        <input type="file" class="form-control form-label" id="video" name ="video" 
-                        required/>
-                        <label class="form-label" for="video">Upload a video</label>
-                      </div>
-                  </div>
-                </div>
-                <div >
-                  <div class="input-group">
-                    <textarea class="form-control" name= "description"aria-label="With textarea"></textarea> 
-                  </div>
-                  <label class="form-label" for="description">Something to add</label>
-                </div>
-                <div class="mt-4 pt-2">
-                  <input class="btn btn-success btn-lg" type="submit" value="Submit" />
-                </div>
-              </form>
-            <?php
-                }
-              }
-            ?>
-
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
--->
 <!-- ################################################################################################ -->
 
 <?php 

@@ -142,42 +142,79 @@
           <div class="card-body">
             <div class="row">
               <div class="col-sm-9">
-                <h5>&#128209; Reservations</p>
+                <h5>&#128209; Reservations Status</p>
               </div>
             </div>
             <hr>
             <!-- MOSTRAR LA RESERVA Y PODER ACEPTAR/RECHAZAR -->
             <?php
-              foreach($specList as $spec) {
-                if ($spec->getIdKeeper() == $_SESSION['loggedUser']["id"]) { ?>
-            <div class="row">
-              <div class="col-sm-3">
-                <p class="mb-0">Price per day</p>
-              </div>
-              <div class="col-sm-9">
-                <p class="text-muted mb-0"><?php echo $spec->getPricePerDay()?></p>
-              </div>
-            </div>
-            <hr>
-            <div class="row">
-              <div class="col-sm-3">
-                <p class="mb-0">Pet's size</p>
-              </div>
-              <div class="col-sm-9">
-                <p class="text-muted mb-0"><?php echo $spec->getPetSizeString() ?></p>
-              </div>
-            </div>
-            <hr>
-            <form action="<?php echo FRONT_ROOT."spec/remove"?>" method="post">
-            <div class="row">
-              <div class="col-sm-3">
-                <button type="submit" name="id_specification" class="btn btn-dark" value="<?php echo $spec->getId() ?>"> Remove &#128229;</button>
-              </div>
-            </div>
-            </form>
+              foreach($reservationList as $reservation) {
+                if ($reservation->getIdKeeper() == $_SESSION['loggedUser']["id"]) { 
+                  foreach($ownerList as $owner) {
+                    if ($owner->getId() == $reservation->getIdOwner()) {
+                      foreach($petList as $pet) {
+                        if ($pet->getId() == $reservation->getIdPet()) {
+            ?>
+            <ul class="list-group list-group-light">
+              <li class="list-group-item d-flex justify-content-between align-items-center mb-3">
+                <div class="d-flex align-items-center">
+                <img src="<?php echo UPLOADS_PATH.$owner->getPhoto()?>" class="rounded-circle" alt=""
+                      style="width: 120px; height: 120px" />
+                  <div class="ms-3">
+                    <p class="fw-bold mb-1"><?php echo $owner->getFullName()?></p>
+                    <p class="text-muted mb-0">&#128231;<?php echo $owner->getEmail()?></p>
+                    <p class="text-muted mb-0">&#128222;<?php echo $owner->getPhone()?></p>
+                    <p class="text-muted mb-0">
+                      <?php echo $pet->getPetTypeString()?><?php echo $pet->getName()?>,
+                      <?php echo $pet->getBreed() ?>
+                    </p>
+                    <p class="text-muted mb-0">&#128207;<?php echo $pet->getSizeString()?></p>
+                    <p class="text-muted mb-0">&#128197;<?php echo $reservation->getDateRange()?></p>
+                    <?php 
+                      if ($reservation->getStatus() == "awaiting response") { 
+                    ?>
+                    <div class="d-flex justify-content-center mt-3">
+                      <a href="<?php echo FRONT_ROOT . "reservation/update?status=accepted"."&id=".$reservation->getIdReservation()?>" 
+                         type="button" class ="btn btn-success ms-5">&#10004;
+                      </a>
+                      <a href="<?php echo FRONT_ROOT . "reservation/update?status=rejected"."&id=".$reservation->getIdReservation()?>" 
+                         type="button" class ="btn btn-danger ms-5">
+                        &#10060;
+                      </a>
+                      <a href="#" type="button" class ="btn btn-info ms-5"><?php echo $pet->getPetTypeString()?>info</a>
+                      <a href="#" type="button" class ="btn btn-dark ms-5">&#9993;</a>
+                    </div>
+                    <?php
+                      } else {
+                    ?>
+                    <div class ="d-flex justify-content-center mt-3">
+                      <a href="#" type="button" class ="btn btn-info ms-5"><?php echo $pet->getPetTypeString()?>info</a>                          
+                      <a href="#" type="button" class ="btn btn-dark ms-5">&#9993;</a>
+                    </div>
+                    <?php
+                      }
+                    ?>
+                  </div>
+                </div>
+                <?php 
+                  if($reservation->getStatus() == "awaiting response") { ?>
+                    <span class="badge bg-warning rounded-pill text-dark"><?php echo $reservation->getStatus()?></span>
+                <?php } else if($reservation->getStatus() == "accepted") { ?>
+                    <span class="badge bg-success rounded-pill text-dark"><?php echo $reservation->getStatus()?></span>
+                <?php } else if($reservation->getStatus() == "rejected") { ?>
+                    <span class="badge bg-danger rounded-pill text-dark"><?php echo $reservation->getStatus()?></span>
+              </li>
+              <?php
+                }
+              ?>
+            </ul>
             <?php
+                  }
                 }
               }
+            }
+          }
+         }
             ?>
           </div>
         </div>

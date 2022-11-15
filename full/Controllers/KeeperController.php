@@ -9,6 +9,8 @@
     use DAO\DateDAO as DateDAO;
     use DAO\SpecDAO as SpecDAO;
     use DAO\ReservationDAO as ReservationDAO;
+    use DAO\OwnerDAO as OwnerDAO;
+    use DAO\PetDAO as PetDAO;
 
     use Exception;
 
@@ -24,6 +26,8 @@
             $this->dateDAO = new DateDAO();
             $this->specDAO = new SpecDAO();
             $this->reservationDAO = new ReservationDAO();
+            $this->ownerDAO = new OwnerDAO();
+            $this->petDAO = new PetDAO();
         }
 
         public function RegisterView($message = "")
@@ -111,6 +115,10 @@
         public function keeperprofile() {
             $specList = $this->specDAO->getAll();
             $dateList = $this->dateDAO->getAll();
+            $reservationList = $this->reservationDAO->getAll();
+            $ownerList = $this->ownerDAO->getAll();
+            $petList = $this->petDAO->getAll();
+
             require_once(VIEWS_PATH."validate-session.php");
             require_once(VIEWS_PATH."keeper-profile.php");
         }

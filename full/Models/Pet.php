@@ -41,6 +41,20 @@
             return $this->id_size;
         }
 
+        public function getSizeString() {
+            switch ($this->id_size) {
+                case 1:
+                    return "Small";
+                    break;
+                case 2:
+                    return "Medium";
+                    break;
+                case 3:
+                    return "Large";
+                    break;
+            }
+        }
+
         public function setSize($id_size) {
             $this->id_size = $id_size;
         }

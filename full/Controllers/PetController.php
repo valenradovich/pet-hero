@@ -33,7 +33,8 @@
                 $tempFileName = $photo["tmp_name"];
                 $type = $photo["type"];
 
-                $filePath = ROOT."Imgs/".basename($fileName); ;          
+                $filePath = ROOT."Imgs/".$fileName; 
+                         
                 
                 $fileType = strtolower(pathinfo($filePath, PATHINFO_EXTENSION));
  
