@@ -2,8 +2,10 @@
     namespace Controllers;
 
     use DAO\PetDAO as PetDAO;
-    use Exception;
     use Models\Pet as Pet;
+    use DAO\BreedDAO as BreedDAO;
+
+    use Exception;
 
     class PetController
     {
@@ -12,15 +14,17 @@
         public function __construct()
         {
             $this->petDAO = new PetDAO();
+            $this->BreedDAO = new BreedDAO();
         }
 
-        public function ShowAddView()
+        public function ShowAddView($alert="")
         {
+            $breedList = $this->BreedDAO->GetAll(); 
             require_once(VIEWS_PATH."validate-session.php");
             require_once(VIEWS_PATH."add-pet.php");
         }
 
-        public function ShowListView()
+        public function ShowListView($alert="")
         {
             $petList = $this->petDAO->getAll();
             require_once(VIEWS_PATH."validate-session.php");
@@ -56,31 +60,42 @@
 
                         $this->petDAO->Add($pet);
 
-                        echo '<script type="text/javascript">',
-                        'swal("Listo", "Fecha registrada con éxito", "success");',
-                        '</script>'
-                        ;
+                        $alert = [
+                            "title" => "Success",
+                            "text" => "Pet added successfully",
+                            "icon" => "success"
+                        ];
                         
-                        # poner header location
-                        $this->ShowAddView();
+                        $this->ShowAddView($alert);
                     }
                 }
                 
             } catch (Exception $ex) {
                 
-                echo '<script type="text/javascript">',
-                'swal("Listo", "Fecha registrada con éxito", "success");',
-                '</script>'
-                ;
-                $this->ShowAddView();
+                $alert = [
+                    "title" => "Error",
+                    "text" => "Pet could not be added, try again",
+                    "icon" => "error"
+                ];
+                $this->ShowAddView($alert);
             }
             
         }
 
         public function Remove($id_pet) {
-            $this->petDAO->Remove($id_pet);
+            try {
+                $this->petDAO->Remove($id_pet);
 
-            $this->ShowListView();
+                $this->ShowListView();
+            } catch (Exception $ex) {
+                $alert = [
+                    "title" => "Error",
+                    "text" => "Pet could not be removed, try again",
+                    "icon" => "error"
+                ];
+                $this->ShowListView($alert);
+            }
+
         }
         
     }

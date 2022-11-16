@@ -25,32 +25,49 @@
         </div>
         <div class="card mb-4 mb-lg-0">
           <div class="card-body p-0">
-            <ul class="list-group list-group-flush rounded-3">
-              <li class="list-group-item d-flex justify-content-between align-items-center p-3">
-                  <span class="material-symbols-outlined">
-                  event_upcoming
-                  </span>
-                  <a class="mb-0" href="<?php echo FRONT_ROOT."date/showlistview "?>" style= color:#198754;>
-                    My dates
+            <h5 class="my-3 ms-3">&#128179; Your Payment Coupons</h5>
+            <hr>
+            <div class ="p-1 ms-3">
+              <?php
+                foreach($paymentCouponList as $p_coupon) {
+                  if ($p_coupon->getIdOwner() == $_SESSION["loggedUser"]["id"]) {                       
+              ?> 
+              <h5 class ="mb-3">Operation Details</h5>
+              <div class ="mb-3">
+                <span>RESERVATION CODE: <span><strong>#<?php echo $p_coupon->getIdReservation() ?></strong></span></span> 
+              </div>
+              <div class ="mb-3">
+                <span>TOTAL AMOUNT: <span><strong>$<?php echo $p_coupon->getAmount() ?></strong></span></span> 
+              </div>
+              <div class ="mb-3">
+                <span>ISSUE DATE: <span><strong><?php echo $p_coupon->getIssueDate() ?></strong></span></span> 
+              </div>
+              <div class ="mb-3">
+                <span>STATUS: <span><strong><?php echo $p_coupon->getStatus() ?></strong></span></span> 
+              </div>
+              <?php
+                  if ($p_coupon->getStatus() == "awaiting response") {
+              ?>
+              <div class="text-center mb-3">
+                  <a 
+                    href="<?php echo FRONT_ROOT."paymentcoupon/update?id=".$p_coupon->getId()."&status=paid" ?>" type="button" class ="btn btn-info">
+                    Pay online&#128521;
                   </a>
-              </li>
-              <li class="list-group-item d-flex justify-content-between align-items-center p-3">
-                <i class="fab fa-github fa-lg" style="color: #333333;"></i>
-                <p class="mb-0"><?php echo $_SESSION["loggedUser"]["id"]?></p>
-              </li>
-              <li class="list-group-item d-flex justify-content-between align-items-center p-3">
-                <i class="fab fa-twitter fa-lg" style="color: #55acee;"></i>
-                <p class="mb-0">-</p>
-              </li>
-              <li class="list-group-item d-flex justify-content-between align-items-center p-3">
-                <i class="fab fa-instagram fa-lg" style="color: #ac2bac;"></i>
-                <p class="mb-0">-</p>
-              </li>
-              <li class="list-group-item d-flex justify-content-between align-items-center p-3">
-                <i class="fab fa-facebook-f fa-lg" style="color: #3b5998;"></i>
-                <p class="mb-0">-</p>
-              </li>
-            </ul>
+              </div>              
+              <?php
+                  } else {
+              ?>
+              <div class ="mb-3">
+                <span>PAY DATE: <span><strong><?php echo $p_coupon->getPayDate() ?></strong></span></span> 
+              </div>
+
+              <?php
+                  }
+                  }
+                }
+              ?>
+            </div>
+            
           </div>
         </div>
       </div>
@@ -120,14 +137,21 @@
             <ul class="list-group list-group-light">
               <li class="list-group-item d-flex justify-content-between align-items-center">
                 <div class="d-flex align-items-center">
-                <img src="<?php echo UPLOADS_PATH.$keeper->getPhoto()?>" class="rounded-circle" alt=""
+                  <img src="<?php echo UPLOADS_PATH.$keeper->getPhoto()?>" class="rounded-circle" alt=""
                       style="width: 120px; height: 120px" />
                   <div class="ms-3">
                     <p class="fw-bold mb-1"><?php echo $keeper->getFullName()?></p>
                     <p class="text-muted mb-0">&#128231;<?php echo $keeper->getEmail()?></p>
                     <p class="text-muted mb-0">&#128222;<?php echo $keeper->getPhone()?></p>
                     <p class="text-muted mb-0">&#128197;<?php echo $reservation->getDateRange()?></p>
-                    <div class="d-flex justify-content-center mt-3">
+                    <p class="text-muted mb-0">
+                      <?php echo $pet->getPetTypeString()?><?php echo $pet->getName()?>,
+                      <?php echo $pet->getBreedString() ?>
+                    </p>
+                    <br>
+                    <p class="text-muted mb-0">Reservation Code: #<?php echo $reservation->getIdReservation() ?></p>
+                    
+                    <div class="d-flex justify-content-center mt-3 text-center">
                       <a href="#" type="button" class ="btn btn-dark">&#9993;</a>
                     </div>
                   </div>
@@ -135,7 +159,7 @@
                 <?php 
                   if($reservation->getStatus() == "awaiting response") { ?>
                     <span class="badge bg-warning rounded-pill text-dark"><?php echo $reservation->getStatus()?></span>
-                <?php } else if($reservation->getStatus() == "accepted") { ?>
+                <?php } else if($reservation->getStatus() == "accepted") { ?>                    
                     <span class="badge bg-success rounded-pill text-dark"><?php echo $reservation->getStatus()?></span>
                 <?php } else if($reservation->getStatus() == "rejected") { ?>
                     <span class="badge bg-danger rounded-pill text-dark"><?php echo $reservation->getStatus()?></span>                
@@ -158,3 +182,12 @@
     </div>
   </div>
 </section>
+<?php
+  if($alert){
+?>
+<script>
+  swal("<?php echo $alert['title']?>", "<?php echo $alert['text']?>", "<?php echo $alert['icon']?>");
+</script>
+<?php
+  }
+?>

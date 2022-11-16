@@ -166,7 +166,7 @@
                     <p class="text-muted mb-0">&#128222;<?php echo $owner->getPhone()?></p>
                     <p class="text-muted mb-0">
                       <?php echo $pet->getPetTypeString()?><?php echo $pet->getName()?>,
-                      <?php echo $pet->getBreed() ?>
+                      <?php echo $pet->getBreedString() ?>
                     </p>
                     <p class="text-muted mb-0">&#128207;<?php echo $pet->getSizeString()?></p>
                     <p class="text-muted mb-0">&#128197;<?php echo $reservation->getDateRange()?></p>
@@ -181,14 +181,24 @@
                          type="button" class ="btn btn-danger ms-5">
                         &#10060;
                       </a>
-                      <a href="#" type="button" class ="btn btn-info ms-5"><?php echo $pet->getPetTypeString()?>info</a>
+                      <a href="#" type="button" class ="btn btn-info ms-5"><?php echo $pet->getPetTypeString()?>&#8505;</a>
                       <a href="#" type="button" class ="btn btn-dark ms-5">&#9993;</a>
                     </div>
                     <?php
-                      } else {
+                      } else if ($reservation->getStatus() == "accepted") {
                     ?>
                     <div class ="d-flex justify-content-center mt-3">
-                      <a href="#" type="button" class ="btn btn-info ms-5"><?php echo $pet->getPetTypeString()?>info</a>                          
+                      <a href="#" type="button" class ="btn btn-dark ms-5">&#9993;</a>
+                      <a href="#" type="button" class ="btn btn-info ms-5"><?php echo $pet->getPetTypeString()?>&#8505;</a>
+                      <a href="<?php echo FRONT_ROOT."paymentCoupon/add?id_r=".$reservation->getIdReservation()."&id_o=".$reservation->getIdOwner()."&amount=".$reservation->getTotalPayment()?>" type="button" class ="btn btn-secondary ms-5">
+                        &#128228;&#129534;
+                      </a>
+                    </div>
+                    <?php
+                      } else if ($reservation->getStatus() == "rejected") {
+                    ?>
+                    <div class ="d-flex justify-content-center mt-3">
+                      <a href="#" type="button" class ="btn btn-info ms-5"><?php echo $pet->getPetTypeString()?>&#8505;</a>                          
                       <a href="#" type="button" class ="btn btn-dark ms-5">&#9993;</a>
                     </div>
                     <?php
@@ -222,3 +232,12 @@
     </div>
   </div>
 </section>
+<?php
+  if($alert){
+?>
+<script>
+  swal("<?php echo $alert['title']?>", "<?php echo $alert['text']?>", "<?php echo $alert['icon']?>");
+</script>
+<?php
+  }
+?>

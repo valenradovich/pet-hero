@@ -13,7 +13,7 @@
             $this->specDAO = new SpecDAO();
         }
 
-        public function show_add_view() {
+        public function show_add_view($alert="") {
             require_once(VIEWS_PATH."validate-session.php");
             require_once(VIEWS_PATH."add-specification.php");
         }
@@ -33,24 +33,28 @@
 
                 $this->specDAO->Add($spec);
 
-                # alert
+                $alert = [
+                    "title" => "Success",
+                    "text" => "Specification successfully uploaded",
+                    "icon" => "success"
+                ];
 
-                $this->show_add_view();
+                $this->show_add_view($alert);
             } catch (Exception $ex) {
-                # alert
-                echo '<p>error</p>';
+                $alert = [
+                    "title" => "Error",
+                    "text" => "The specification could not be uploaded",
+                    "icon" => "error"
+                ];
 
-                $this->show_add_view();
+                $this->show_add_view($alert);
             }
         }
 
         public function remove($id_specification) {
             try {
                 $this->specDAO->Remove($id_specification);
-
-                # alert
                 
-                #$this->show_list_view();
                 header("location: ".FRONT_ROOT."keeper/keeperprofile");
             } catch (Exception $ex) {
                 # alert

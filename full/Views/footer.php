@@ -1,4 +1,4 @@
-<footer class="p-3 mb-2 bg-dark text-white" style="padding-bottom: 0;">
+<div class="p-3 mb-2 bg-dark text-white" style="padding-bottom: 0;">
   <!-- Grid container -->
   <div class="container p-4">
     <!--Grid row-->
@@ -11,7 +11,7 @@
                 loading="lazy" />
         </div>
 
-        <p class="text-center">Homless animal shelter The budgetary unit of the Capital City of Warsaw</p>
+        <p class="text-center">The best website to take care of your pets when you can't... Or you can be the one who takes care of someone else's pets :)</p>
 
         <ul class="list-unstyled d-flex flex-row justify-content-center">
           <li>
@@ -119,10 +119,6 @@
     <a class="text-white" href="https://mdbootstrap.com/">MDBootstrap.com</a>
   </div>
   <!-- Copyright -->
-</footer>
-<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
-</body>
-</html>
+</div>
 
 

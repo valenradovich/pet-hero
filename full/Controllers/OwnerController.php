@@ -10,6 +10,7 @@
     use DAO\ReservationDAO as ReservationDAO;
     use DAO\KeeperDAO as KeeperDAO;
     use DAO\PetDAO as PetDAO;
+    use DAO\PaymentCouponDAO as PaymentCouponDAO;
 
     use Exception;
 
@@ -26,9 +27,10 @@
             $this->reservationDAO = new ReservationDAO();
             $this->keeperDAO = new KeeperDAO();
             $this->petDAO = new PetDAO();
+            $this->paymentCouponDAO = new PaymentCouponDAO();
         }
 
-        public function RegisterView($message = "")
+        public function RegisterView($alert = "")
         {
             $provinceList = $this->provinceDAO->GetAll();
             $cityList = $this->cityDAO->GetAll();
@@ -67,29 +69,29 @@
 
                         $this->ownerDAO->Add($owner);
 
-                        echo '<script type="text/javascript">',
-                        'swal("Listo", "Fecha registrada con éxito", "success");',
-                        '</script>'
-                        ;
+                        $alert = [
+                            "title" => "Success",
+                            "text" => "Registration completed, you can now log in",
+                            "icon" => "success"
+                        ];
 
-                        $this->RegisterView("");
+                        $this->LoginView($alert);
                     }
                 }
 
             } catch (Exception $ex) {
+                $alert = [
+                    "title" => "Error",
+                    "text" => "Account could not be registered, try again",
+                    "icon" => "error"
+                ];
 
-                echo '<script type="text/javascript">',
-                'swal("Listo", "Fecha registrada con éxito", "success");',
-                '</script>'
-                ;
-
-                $this->RegisterView("");    
-            }
-            
+                $this->RegisterView($alert);    
+            }   
             
         }
 
-        public function LoginView($message = "")
+        public function LoginView($alert = "")
         {
             require_once(VIEWS_PATH."login-owner.php");
         }
@@ -100,10 +102,11 @@
             require_once(VIEWS_PATH."add-pet.php");
         }
 
-        public function ownerprofile() {
+        public function ownerprofile($alert="") {
             $reservationList = $this->reservationDAO->GetAll();
             $keeperList = $this->keeperDAO->GetAll();
             $petList = $this->petDAO->GetAll();
+            $paymentCouponList = $this->paymentCouponDAO->GetAll();
 
             require_once(VIEWS_PATH."validate-session.php");
             require_once(VIEWS_PATH."owner-profile.php");
@@ -131,16 +134,30 @@
                     "full_name"=>$owner->getFullName(),
                     "address"=>$owner->getAddress());
                     
-                    echo '<script type="text/javascript">',
-                        'swal("Listo", "Login exitoso", "success");',
-                        '</script>';
+                    $alert = [
+                        "title" => "Success",
+                        "text" => "Session successfully logged in",
+                        "icon" => "success"
+                    ];
                                         
 
-                    $this->ownerprofile();
+                    $this->ownerprofile($alert);
+                } else {
+                    $alert = [
+                        "title" => "Error",
+                        "text" => "Incorrect user name and/or password",
+                        "icon" => "error"
+                    ];
+                    $this->LoginView($alert);
                 }
 
-            } catch (\Throwable $th) {
-                $this->LoginView("Usuario y/o Contraseña incorrectos");
+            } catch (Exception $ex) {
+                $alert = [
+                    "title" => "Error",
+                    "text" => "Incorrect user name and/or password",
+                    "icon" => "error"
+                ];
+                $this->LoginView($alert);
             } 
         }
         

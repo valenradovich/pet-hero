@@ -3,7 +3,7 @@
   include('nav-bar-owner.php');
 ?>
 <!-- ################################################################################################ -->
-<section class="vh-100 bg-secondary responsive">
+<section class="bg-secondary responsive">
   <div class="container p-3 h-100">
     <div class="row justify-content-center align-items-center h-100">
       <div class="col-12 col-lg-9 col-xl-7">
@@ -47,9 +47,13 @@
                 <div class="col-md-6 mb-5 d-flex align-items-center">
                   <select class="form-select" name= "id_breed" required>
                     <option selected disabled>Select a Breed</option>
-                    <option value="1">Subject 1</option>
-                    <option value="2">Subject 2</option>
-                    <option value="3">Subject 3</option>
+                    <?php 
+                      foreach($breedList as $breed) { 
+                    ?>
+                      <option value="<?php echo $breed->getId(); ?>"><?php echo $breed->getName(); ?></option>
+                    <?php 
+                      } 
+                    ?>    
                   </select>              
                 </div>         
                 <div class="col-md-6 mb-4">
@@ -106,6 +110,15 @@
     </div>
   </div>
 </section>
+<?php
+  if($alert){
+?>
+<script>
+  swal("<?php echo $alert['title']?>", "<?php echo $alert['text']?>", "<?php echo $alert['icon']?>");
+</script>
+<?php
+  }
+?>
 <!-- ################################################################################################ -->
 
 <?php 

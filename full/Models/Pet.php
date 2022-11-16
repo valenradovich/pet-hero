@@ -37,6 +37,80 @@
             $this->id_breed = $id_breed;
         }
 
+        public function getBreedString() {
+            switch ($this->id_breed) {
+                case 1:
+                    return "Street Dog";
+                    break;
+                case 2:
+                    return "Bulldog Francés";
+                    break;
+                case 3:
+                    return "Pastor alemán";
+                    break;
+                case 4:
+                    return "Bulldog inglés";
+                    break;
+                case 5:
+                    return "Jack russell terrier";
+                    break;
+                case 6:
+                    return "Bóxer";
+                    break;
+                case 7:
+                    return "Labrador";
+                    break;
+                case 8:
+                    return "Caniche";
+                    break;
+                case 9:
+                    return "Golden";
+                    break;
+                case 10:
+                    return "Sharpei";
+                    break;
+                case 11:
+                    return "Beagle";
+                    break;
+                case 12:
+                    return "Salchicha";
+                    break;
+                case 13:
+                    return "Rottweiler";
+                    break;
+                case 14:
+                    return "San Bernardo";
+                    break;
+                case 15:
+                    return "Chihuahua";
+                    break;
+                case 16:
+                    return "Dálmata";
+                    break;
+                case 18:
+                    return "Street Cat";
+                    break;
+                case 19:
+                    return "Siamés";
+                    break;
+                case 20:
+                    return "Sphynx";
+                    break;
+                case 21:
+                    return "Van turco";
+                    break;
+                case 22:
+                    return "Británico";
+                    break;
+                case 23:
+                    return "Bengala";
+                    break;
+                case 23:
+                    return "Persa";
+                    break;
+            }
+        }
+
         public function getSize() {
             return $this->id_size;
         }

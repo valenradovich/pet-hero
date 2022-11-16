@@ -30,7 +30,7 @@
             $this->petDAO = new PetDAO();
         }
 
-        public function RegisterView($message = "")
+        public function RegisterView($alert = "")
         {
             $provinceList = $this->provinceDAO->GetAll();
             $cityList = $this->cityDAO->GetAll();
@@ -69,28 +69,30 @@
             
                         $this->keeperDAO->Add($keeper);
 
-                        echo '<script type="text/javascript">',
-                        'swal("Listo", "Fecha registrada con éxito", "success");',
-                        '</script>'
-                        ;
+                        $alert = [
+                            "title" => "Success",
+                            "text" => "Registration completed, you can now log in",
+                            "icon" => "success"
+                        ];
             
-                        $this->LoginView("Keeper registrado con éxito");
+                        $this->LoginView($alert);
                     }
                 }
 
             } catch (Exception $ex) {
 
-                echo '<script type="text/javascript">',
-                'swal("Error", "Fecha registrada con éxito", "error");',
-                '</script>'
-                ;
-                $this->RegisterView("Error al registrar cuidador");
+                $alert = [
+                    "title" => "Error",
+                    "text" => "Account could not be registered, try again",
+                    "icon" => "error"
+                ];
+                $this->RegisterView($alert);
             }
             
 
         }
         
-        public function LoginView($message = "")
+        public function LoginView($alert = "")
         {
             require_once(VIEWS_PATH."login-keeper.php");
         }
@@ -112,7 +114,7 @@
             require_once(VIEWS_PATH."keeper-list.php");
         }
 
-        public function keeperprofile() {
+        public function keeperprofile($alert="") {
             $specList = $this->specDAO->getAll();
             $dateList = $this->dateDAO->getAll();
             $reservationList = $this->reservationDAO->getAll();
@@ -125,30 +127,53 @@
 
         public function Login($email, $password)
         {
-            $keeper = $this->keeperDAO->getByEmail($email);
+            try {
+                $keeper = $this->keeperDAO->getByEmail($email);
 
-            if(($keeper != null) && ($keeper->getPassword() === $password) && ($keeper->getUserType()==2) )
-            {
-                $_SESSION["loggedUser"] = array(
-                                                "id"=>$keeper->getId(),
-                                                "firstname"=>$keeper->getFirstName(),
-                                                "lastname"=>$keeper->getFirstName(),
-                                                "email"=>$keeper->getEmail(),
-                                                "dni"=>$keeper->getDNI(),
-                                                "id_province"=>$keeper->getProvince(), 
-                                                "id_city"=>$keeper->getCity(),
-                                                "live_place"=>$keeper->getLiveIn(),
-                                                "phone"=>$keeper->getPhone(),
-                                                "user_type"=>$keeper->getUserType(),
-                                                "user_type_string"=>$keeper->getUserTypeString(),
-                                                "photo"=>$keeper->getPhoto(),
-                                                "full_name"=>$keeper->getFullName(),
-                                                "address"=>$keeper->getAddress(),
-                                                );
-                $this->keeperprofile();
-            }
-            else
-                $this->LoginView("Usuario y/o Contraseña incorrectos");
+                if(($keeper != null) && ($keeper->getPassword() === $password) && ($keeper->getUserType()==2) )
+                {
+                    $_SESSION["loggedUser"] = array(
+                                                    "id"=>$keeper->getId(),
+                                                    "firstname"=>$keeper->getFirstName(),
+                                                    "lastname"=>$keeper->getFirstName(),
+                                                    "email"=>$keeper->getEmail(),
+                                                    "dni"=>$keeper->getDNI(),
+                                                    "id_province"=>$keeper->getProvince(), 
+                                                    "id_city"=>$keeper->getCity(),
+                                                    "live_place"=>$keeper->getLiveIn(),
+                                                    "phone"=>$keeper->getPhone(),
+                                                    "user_type"=>$keeper->getUserType(),
+                                                    "user_type_string"=>$keeper->getUserTypeString(),
+                                                    "photo"=>$keeper->getPhoto(),
+                                                    "full_name"=>$keeper->getFullName(),
+                                                    "address"=>$keeper->getAddress(),
+                                                    );
+                    $alert = [
+                        "title" => "Success",
+                        "text" => "Session successfully logged in",
+                        "icon" => "success"
+                    ];
+    
+                    $this->keeperprofile($alert); 
+    
+                } else {
+                    
+                    $alert = [
+                        "title" => "Error",
+                        "text" => "Incorrect user name and/or password",
+                        "icon" => "error"
+                    ];
+    
+                    $this->LoginView($alert);
+                }
+            } catch (Exception $ex) {
+                $alert = [
+                    "title" => "Error",
+                    "text" => "Incorrect user name and/or password",
+                    "icon" => "error"
+                ];
+                $this->LoginView($alert);
+            }         
         }
 
         public function Logout()

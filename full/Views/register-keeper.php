@@ -126,6 +126,15 @@
     </section>
   </div>
 </div>
+<?php
+  if($alert){
+?>
+<script>
+  swal("<?php echo $alert['title']?>", "<?php echo $alert['text']?>", "<?php echo $alert['icon']?>");
+</script>
+<?php
+  }
+?>
 <!-- ################################################################################################ -->
 
 <?php 

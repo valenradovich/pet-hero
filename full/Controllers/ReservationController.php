@@ -56,9 +56,13 @@
 
                     foreach($validateList as $reservation) {
                         if ($reservation->getIdBreed() != $id_breed) {
-                            echo 'el keeper tiene una reserva esa misma fecha con otra raza de mascota';
+                            $alert = [
+                                "title" => "Error",
+                                "text" => "The keeper has a reservation in the same date with another pet breed!",
+                                "icon" => "error"
+                            ];
 
-                            header("location: ".FRONT_ROOT."owner/ownerprofile");
+                            header("location: ".FRONT_ROOT."owner/ownerprofile(".$alert.")");
                         } else {
                             try {
                                 $reservation = new Reservation();
@@ -73,11 +77,19 @@
         
                                 $this->reservationDAO->add($reservation);
         
-                                echo 'reserva cargada desp de verificar, HAY reservas coincidentes';
+                                $alert = [
+                                    "title" => "Success",
+                                    "text" => "Reservation added successfully!",
+                                    "icon" => "success"
+                                ];
         
-                                header("location:" . FRONT_ROOT . "owner/ownerprofile");
+                                header("location:" . FRONT_ROOT . "owner/ownerprofile(".$alert.")");
                             } catch (Exception $ex) {
-                                //throw $th;
+                                $alert = [
+                                    "title" => "Error",
+                                    "text" => "Reservation not added, try again",
+                                    "icon" => "error"
+                                ];
                                 header("location:" . FRONT_ROOT . "owner/ownerprofile");
                             }
 
@@ -115,50 +127,6 @@
                 //throw $th;
             }
 
-            
-            /*foreach ($reservationList as $reservation) {
-                if ($reservation->getIdKeeper() == $id_keeper && 
-                    $reservation->getIdDate() == $id_date &&
-                    $reservation->getStatus() == "accepted") {
-                    foreach ($petList as $pet) {
-                        if ($pet->getId()==$reservation->getIdPet()) {
-                            foreach ($petList as $newPet){
-                                if($newPet->getId()==$id_pet){
-                                    if($pet->getBreed() == $newPet->getBreed()) {
-                                        try {
-                                            $reservation = new Reservation();
-                                            $reservation->setIdOwner($_SESSION["loggedUser"]["id"]);
-                                            $reservation->setIdPet($id_pet);
-                                            $reservation->setIdKeeper($id_keeper);
-                                            $reservation->setPrice($price);
-                                            $reservation->setIdDate($id_date);
-                                            $reservation->setStartDate($start_date);
-                                            $reservation->setEndDate($end_date);
-                                            $reservation->setStatus("awaiting response");
-
-                                            $this->reservationDAO->add($reservation);
-
-                                            echo 'reserva cargada desp de verificar';
-
-                                            header("location:" . FRONT_ROOT . "owner/ownerprofile");
-                                        } catch (Exception $ex) {
-                                            echo 'error';
-                                            header("location:" . FRONT_ROOT . "owner/ownerprofile");
-                                        }   
-
-                                    } else {
-                                        echo 'No se puede reservar a un cuidador con mascotas de distinta raza';
-                                        header("location:" . FRONT_ROOT . "owner/ownerprofile");
-                                    }
-
-                                }
-
-                            }
-                            
-                        }
-                    }
-                }
-            }*/
         }
 
         public function remove($id) {

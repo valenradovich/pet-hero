@@ -105,6 +105,17 @@
         public function getDateRange() {
             return $this->start_date . ' to ' . $this->end_date;
         }
+
+        public function getDays(){
+            $start = new \DateTime($this->start_date);
+            $end = new \DateTime($this->end_date);
+            $interval = $start->diff($end);
+            return $interval->days;
+        }
+
+        public function getTotalPayment() {
+            return $this->price * $this->getDays();
+        }
     }
 
 ?>

@@ -15,8 +15,9 @@
             $this->dateDAO = new DateDAO();
         }
 
-        public function ShowAddView()
+        public function ShowAddView($alert="")
         {
+            require_once(VIEWS_PATH."validate-session.php");
             require_once(VIEWS_PATH."add-date.php");
         }
 
@@ -38,19 +39,21 @@
 
                 $this->dateDAO->Add($date);
                 
-                echo '<script type="text/javascript">',
-                'swal("Listo", "Fecha registrada con éxito", "success");',
-                '</script>'
-                ;
+                $alert = [
+                    "title" => "Success",
+                    "text" => "Date successfully uploaded",
+                    "icon" => "success"
+                ];
 
-                $this->ShowAddView();
+                $this->ShowAddView($alert);
             } catch (Exception $ex) {
                 
-                echo '<script type="text/javascript">',
-                'swal("Error", "No pudimos registrar el rango de fechas solicitado", "error");',
-                '</script>'
-                ;
-                $this->ShowAddView();
+                $alert = [
+                    "title" => "Error",
+                    "text" => "The requested date range could not be entered, check if you have one uploaded.",
+                    "icon" => "error"
+                ];
+                $this->ShowAddView($alert);
             }
             
         }
