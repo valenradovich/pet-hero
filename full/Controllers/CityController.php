@@ -2,7 +2,8 @@
     namespace Controllers;
 
     use DAO\CityDAO as CityDAO;
-    use Models\City as City;
+use Exception;
+use Models\City as City;
 
     class CityController
     {
@@ -15,7 +16,12 @@
 
         public function GetAll()
         {
-            $cityList = $this->cityDAO->GetAll();
+            try {
+                $cityList = $this->cityDAO->GetAll();
+            } catch (Exception $th) {
+                
+            }
+            
         }
     }
 

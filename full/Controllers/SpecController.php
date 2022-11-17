@@ -57,9 +57,7 @@
                 
                 header("location: ".FRONT_ROOT."keeper/keeperprofile");
             } catch (Exception $ex) {
-                # alert
 
-                #$this->show_list_view();
                 header("location: ".FRONT_ROOT."keeper/keeperprofile");
                 
             }

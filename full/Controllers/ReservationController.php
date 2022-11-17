@@ -41,7 +41,6 @@
             require_once(VIEWS_PATH."reservation-list.php");
         }
 
-        # manejar las alerts como objetos
         public function add($id_pet, $id_keeper, $price, $id_date, $start_date, $end_date) {
             try {
                 # traigo el id_breed del pet que se cargó para la reserva
@@ -133,12 +132,10 @@
             try {
                 $this->reservationDAO->Remove($id);
 
-                # alert
-
                 $this->showListView();
 
             } catch (Exception $ex) {
-                # alert
+
                 $this->showListView();
             }
         }
@@ -147,12 +144,9 @@
             try {
                 $this->reservationDAO->Update($id, $status);
 
-                # alert
-
                 header("location:" . FRONT_ROOT . "keeper/keeperprofile");
 
             } catch (Exception $ex) {
-                # alert
 
                 header("location:" . FRONT_ROOT . "keeper/keeperprofile");
             }

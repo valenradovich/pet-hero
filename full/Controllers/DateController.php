@@ -60,9 +60,14 @@
 
         public function Remove($id_dateRange)
         {
-            $this->dateDAO->Remove($id_dateRange);
+            try {
+                $this->dateDAO->Remove($id_dateRange);
 
-            $this->ShowListView();
+                $this->ShowListView();
+            } catch (\Throwable $th) {
+                $this->ShowListView();
+            }
+            
         }
 
         public function GetAll()
