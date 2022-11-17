@@ -89,7 +89,7 @@
                 <div class="col-md-6 mb-4 pb-2">
                   <div class="form-outline">
                       <input type="file" class="form-control form-label" id="video" name ="video" 
-                       required/>
+                       />
                       <label class="form-label" for="video">Upload a video</label>
                     </div>
                 </div>

@@ -62,7 +62,7 @@
                                 "icon" => "error"
                             ];
 
-                            header("location: ".FRONT_ROOT."owner/ownerprofile(".$alert.")");
+                            header("location: ".FRONT_ROOT."owner/ownerprofile");
                         } else {
                             try {
                                 $reservation = new Reservation();
@@ -83,7 +83,7 @@
                                     "icon" => "success"
                                 ];
         
-                                header("location:" . FRONT_ROOT . "owner/ownerprofile(".$alert.")");
+                                header("location:" . FRONT_ROOT . "owner/ownerprofile");
                             } catch (Exception $ex) {
                                 $alert = [
                                     "title" => "Error",

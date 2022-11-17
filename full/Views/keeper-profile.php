@@ -24,6 +24,46 @@
         </div>
         <div class="card mb-4 mb-lg-0">
           <div class="card-body p-0">
+            <h5 class="my-3 ms-3">&#128179; Payment Coupons</h5>
+            <hr>
+            <div class ="p-1 ms-3">
+              <?php
+                foreach($paymentCouponList as $p_coupon) {
+                  if ($p_coupon->getIdKeeper() == $_SESSION["loggedUser"]["id"]) {                       
+              ?> 
+              <h5 class ="mb-3">Operation Details</h5>
+              <div class ="mb-3">
+                <span>RESERVATION CODE: <span><strong>#<?php echo $p_coupon->getIdReservation() ?></strong></span></span> 
+              </div>
+              <div class ="mb-3">
+                <span>TOTAL AMOUNT: <span><strong>$<?php echo $p_coupon->getAmount() ?></strong></span></span> 
+              </div>
+              <div class ="mb-3">
+                <span>ISSUE DATE: <span><strong><?php echo $p_coupon->getIssueDate() ?></strong></span></span> 
+              </div>
+              <div class ="mb-3">
+                <span>STATUS: <span><strong><?php echo $p_coupon->getStatus() ?></strong></span></span> 
+              </div>
+              <?php
+                  if ($p_coupon->getStatus() == "awaiting response") {
+              ?>             
+              <?php
+                  } else {
+              ?>
+              <div class ="mb-3">
+                <span>PAY DATE: <span><strong><?php echo $p_coupon->getPayDate() ?></strong></span></span> 
+              </div>
+
+              <?php
+                  }
+                  }
+                }
+              ?>
+            </div>
+          </div>
+        </div>
+        <!--<div class="card mb-4 mb-lg-0">
+          <div class="card-body p-0">
             <ul class="list-group list-group-flush rounded-3">
               <li class="list-group-item d-flex justify-content-between align-items-center p-3">  
                 <a href="<?php echo FRONT_ROOT."date/showlistview "?>">
@@ -44,7 +84,7 @@
               </li>
             </ul>
           </div>
-        </div>
+        </div>-->
       </div>
       <div class="col-lg-8">
         <div class="card mb-4">
@@ -118,7 +158,7 @@
             <hr>
             <div class="row">
               <div class="col-sm-3">
-                <p class="mb-0">Pet's size</p>
+                <p class="mb-0">Pet's size preference</p>
               </div>
               <div class="col-sm-9">
                 <p class="text-muted mb-0"><?php echo $spec->getPetSizeString() ?></p>
@@ -170,6 +210,9 @@
                     </p>
                     <p class="text-muted mb-0">&#128207;<?php echo $pet->getSizeString()?></p>
                     <p class="text-muted mb-0">&#128197;<?php echo $reservation->getDateRange()?></p>
+                    <br>
+                    <p class="text-muted mb-0">Reservation Code: #<?php echo $reservation->getIdReservation() ?></p>
+                    
                     <?php 
                       if ($reservation->getStatus() == "awaiting response") { 
                     ?>

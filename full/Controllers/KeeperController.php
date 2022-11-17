@@ -11,6 +11,7 @@
     use DAO\ReservationDAO as ReservationDAO;
     use DAO\OwnerDAO as OwnerDAO;
     use DAO\PetDAO as PetDAO;
+    use DAO\PaymentCouponDAO as PaymentCouponDAO;
 
     use Exception;
 
@@ -28,6 +29,7 @@
             $this->reservationDAO = new ReservationDAO();
             $this->ownerDAO = new OwnerDAO();
             $this->petDAO = new PetDAO();
+            $this->paymentCouponDAO = new PaymentCouponDAO();
         }
 
         public function RegisterView($alert = "")
@@ -120,6 +122,7 @@
             $reservationList = $this->reservationDAO->getAll();
             $ownerList = $this->ownerDAO->getAll();
             $petList = $this->petDAO->getAll();
+            $paymentCouponList = $this->paymentCouponDAO->getAll();
 
             require_once(VIEWS_PATH."validate-session.php");
             require_once(VIEWS_PATH."keeper-profile.php");

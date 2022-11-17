@@ -22,7 +22,7 @@
                       <option value="2">Medium</option>
                       <option value="3">Large</option>
                     </select>  
-                    <label class="form-label" for="id_size_of_pets">Pet Size</label>
+                    <label class="form-label" for="id_size_of_pets">Pet Size Preference</label>
                   </div>
               </div>
               <div class="col-md-6 mb-4">
