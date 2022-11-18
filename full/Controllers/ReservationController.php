@@ -140,8 +140,63 @@
             }
         }
 
-        public function update($id, $status) {
+        public function update($id_reserv, $status, $id_pet, $id_date) {
             try {
+                # traigo el id_breed del pet que se cargó para la reserva
+                # FIJARSE DE HACERLO EN LA DB O ACÁ MISMO PARA LA ENTREGA
+                $pet = $this->petDAO->getById($id_pet);
+                $id_breed = $pet->getBreed();
+
+                # traigo una lista de las reservas creadas que coincidan keeper y fecha
+                $validateList = $this->reservationDAO->validation($_SESSION["loggedUser"]["id"], $id_date);
+
+                # si la lista tiene registros entro al if
+                if (count($validateList) >= 1) {
+
+                    foreach($validateList as $reservation) {
+                        if ($reservation->getIdBreed() != $id_breed) {
+                            $alert = [
+                                "title" => "Error",
+                                "text" => "The keeper has a reservation in the same date with another pet breed!",
+                                "icon" => "error"
+                            ];
+
+                            header("location: ".FRONT_ROOT."keeper/keeperprofile");
+                        } else {
+                            try {
+                                # validar las reservas al momento de aceptarlas/rechazarlas ANTES DEL UPDATE
+                                $this->reservationDAO->Update($id_reserv, $status);
+                
+                                header("location:" . FRONT_ROOT . "keeper/keeperprofile");
+                
+                            } catch (Exception $ex) {
+                
+                                header("location:" . FRONT_ROOT . "keeper/keeperprofile");
+                            }
+
+                            
+                        }
+                    }
+
+                } else {
+                    try {
+                        # validar las reservas al momento de aceptarlas/rechazarlas ANTES DEL UPDATE
+                        $this->reservationDAO->Update($id_reserv, $status);
+        
+                        header("location:" . FRONT_ROOT . "keeper/keeperprofile");
+        
+                    } catch (Exception $ex) {
+        
+                        header("location:" . FRONT_ROOT . "keeper/keeperprofile");
+                    }
+                }
+
+            } catch (Exception $ex) {
+                //throw $th;
+            }
+
+            /*try {
+                # validar las reservas al momento de aceptarlas/rechazarlas ANTES DEL UPDATE
                 $this->reservationDAO->Update($id, $status);
 
                 header("location:" . FRONT_ROOT . "keeper/keeperprofile");
@@ -149,7 +204,7 @@
             } catch (Exception $ex) {
 
                 header("location:" . FRONT_ROOT . "keeper/keeperprofile");
-            }
+            }*/
         }
 
 

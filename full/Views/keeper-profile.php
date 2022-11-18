@@ -217,10 +217,10 @@
                       if ($reservation->getStatus() == "awaiting response") { 
                     ?>
                     <div class="d-flex justify-content-center mt-3">
-                      <a href="<?php echo FRONT_ROOT . "reservation/update?status=accepted"."&id=".$reservation->getIdReservation()?>" 
+                      <a href="<?php echo FRONT_ROOT . "reservation/update?status=accepted"."&id_reserv=".$reservation->getIdReservation()."&id_pet=".$pet->getId()."&id_date=".$reservation->getIdDate()?>" 
                          type="button" class ="btn btn-success ms-5">&#10004;
                       </a>
-                      <a href="<?php echo FRONT_ROOT . "reservation/update?status=rejected"."&id=".$reservation->getIdReservation()?>" 
+                      <a href="<?php echo FRONT_ROOT . "reservation/update?status=rejected"."&id_reserv=".$reservation->getIdReservation()."&id_pet=".$pet->getId()."&id_date=".$reservation->getIdDate()?>" 
                          type="button" class ="btn btn-danger ms-5">
                         &#10060;
                       </a>
