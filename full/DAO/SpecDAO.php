@@ -15,10 +15,12 @@
 
         public function Add(Spec $spec){
             try {
-                $query = "CALL specifications_add(?, ?, ?)";
+                $query = "CALL specifications_add(?, ?, ?, ?, ?)";
             
                 $parameters["id_keeper"] = $spec->getIdKeeper();
-                $parameters["id_size_of_pets"] = $spec->getIdSizeOfPets();
+                $parameters["small_pets"] = $spec->getSmallPets();
+                $parameters["medium_pets"] = $spec->getMediumPets();
+                $parameters["large_pets"] = $spec->getLargePets();
                 $parameters["price_per_day"] = $spec->getPricePerDay();
                 
                 $this->connection = Connection::GetInstance();
@@ -47,7 +49,9 @@
                     $spec = new Spec();
                     $spec->setId($row["id_specification"]);
                     $spec->setIdKeeper($row["id_keeper"]);
-                    $spec->setIdSizeOfPets($row["id_size_of_pets"]);
+                    $spec->setSmallPets($row["small_pets"]);
+                    $spec->setMediumPets($row["medium_pets"]);
+                    $spec->setLargePets($row["large_pets"]);
                     $spec->setPricePerDay($row["price_per_day"]);
 
                     array_push($specList, $spec);
@@ -87,10 +91,12 @@
                 $result = $this->connection->Execute($query, $parameters, QueryType::StoredProcedure);
 
                 $spec = new Spec();
-                $spec->setId($result[0]["id_specification"]);
-                $spec->setIdKeeper($result[0]["id_keeper"]);
-                $spec->setIdSizeOfPets($result[0]["id_size_of_pets"]);
-                $spec->setPricePerDay($result[0]["price_per_day"]);
+                $spec->setId($result["id_specification"]);
+                $spec->setIdKeeper($result["id_keeper"]);
+                $spec->setSmallPets($result["small_pets"]);
+                $spec->setMediumPets($result["medium_pets"]);
+                $spec->setLargePets($result["large_pets"]);
+                $spec->setPricePerDay($result["price_per_day"]);
 
                 return $spec;
 

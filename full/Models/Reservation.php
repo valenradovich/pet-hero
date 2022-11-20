@@ -113,8 +113,8 @@
             return $interval->days;
         }
 
-        public function getTotalPayment() {
-            return $this->price * $this->getDays();
+        public function get50PercentPayment() {
+            return $this->price * $this->getDays() * 0.5;
         }
     }
 

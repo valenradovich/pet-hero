@@ -62,29 +62,6 @@
             </div>
           </div>
         </div>
-        <!--<div class="card mb-4 mb-lg-0">
-          <div class="card-body p-0">
-            <ul class="list-group list-group-flush rounded-3">
-              <li class="list-group-item d-flex justify-content-between align-items-center p-3">  
-                <a href="<?php echo FRONT_ROOT."date/showlistview "?>">
-                <button class="mb-0 btn btn-dark">&#128467; My dates</button>
-                </a>
-              </li>
-              <li class="list-group-item d-flex justify-content-between align-items-center p-3">
-                <i class="fab fa-twitter fa-lg" style="color: #55acee;"></i>
-                <p class="mb-0">-</p>
-              </li>
-              <li class="list-group-item d-flex justify-content-between align-items-center p-3">
-                <i class="fab fa-instagram fa-lg" style="color: #ac2bac;"></i>
-                <p class="mb-0">-</p>
-              </li>
-              <li class="list-group-item d-flex justify-content-between align-items-center p-3">
-                <i class="fab fa-facebook-f fa-lg" style="color: #3b5998;"></i>
-                <p class="mb-0">-</p>
-              </li>
-            </ul>
-          </div>
-        </div>-->
       </div>
       <div class="col-lg-8">
         <div class="card mb-4">
@@ -143,7 +120,6 @@
               </div>
             </div>
             <hr>
-            <!-- añadir bucle para poder mostrar las specs del keeper en cuestión -->
             <?php
               foreach($specList as $spec) {
                 if ($spec->getIdKeeper() == $_SESSION['loggedUser']["id"]) { ?>
@@ -161,7 +137,7 @@
                 <p class="mb-0">Pet's size preference</p>
               </div>
               <div class="col-sm-9">
-                <p class="text-muted mb-0"><?php echo $spec->getPetSizeString() ?></p>
+                <p class="text-muted mb-0"><?php echo $spec->getAllStringPetsSize() ?></p>
               </div>
             </div>
             <hr>
@@ -233,7 +209,7 @@
                     <div class ="d-flex justify-content-center mt-3">
                       <a href="#" type="button" class ="btn btn-dark ms-5">&#9993;</a>
                       <a href="#" type="button" class ="btn btn-info ms-5"><?php echo $pet->getPetTypeString()?>&#8505;</a>
-                      <a href="<?php echo FRONT_ROOT."paymentCoupon/add?id_r=".$reservation->getIdReservation()."&id_o=".$reservation->getIdOwner()."&amount=".$reservation->getTotalPayment()?>" type="button" class ="btn btn-secondary ms-5">
+                      <a href="<?php echo FRONT_ROOT."paymentCoupon/add?id_r=".$reservation->getIdReservation()."&id_o=".$reservation->getIdOwner()."&amount=".$reservation->get50PercentPayment()?>" type="button" class ="btn btn-secondary ms-5">
                         &#128228;&#129534;
                       </a>
                     </div>

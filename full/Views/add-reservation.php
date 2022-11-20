@@ -87,8 +87,8 @@
               <p class="text-muted mb-2">$<?php echo $spec->getPricePerDay()?></p>
             </div> 
             <div>
-              <p class="mb-0">Size of pets:</p>
-              <p class="text-muted mb-2"><?php echo $spec->getPetSizeString()?></p>
+              <p class="mb-0">Size of pets accepted:</p>
+              <p class="text-muted mb-2"><?php echo $spec->getAllStringPetsSize()?></p>
             </div> 
             <?php
                 }
@@ -123,11 +123,22 @@
                 <?php
                   foreach($petList as $pet) {
                     if ($pet->getIdOwner() == $_SESSION['loggedUser']['id']) {
+                      if($pet->getSize()==1 && $spec->getSmallPets()==1) {  
+                ?>
+                  <option selected value="<?php echo $pet->getId()?>"><?php echo $pet->getName()?></option>
+                <?php
+                    } else if ($pet->getSize()==2 && $spec->getMediumPets()==1) {
+                ?>
+                  <option selected value="<?php echo $pet->getId()?>"><?php echo $pet->getName()?></option>
+                <?php
+                    } else if ($pet->getSize()==3 && $spec->getLargePets()==1) {
+
                 ?>
                   <option selected value="<?php echo $pet->getId()?>"><?php echo $pet->getName()?></option>
                 <?php
                     }
                   }
+                }
                 ?>
                 </select>  
               </div>
@@ -183,7 +194,7 @@
               <?php
                 }
               }
-            ?>
+              ?>
             </div>
             <hr>
             <div class="row">
@@ -224,10 +235,12 @@
       <?php
                 }
               }
+              
       ?>
     </div>
   </div>
 </section>
+
 <!-- ################################################################################################ -->
 <?php 
   include('footer.php');

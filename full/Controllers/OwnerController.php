@@ -65,7 +65,7 @@
                         $owner->setCity($id_city);
                         $owner->setPhone($phone);
                         $owner->setAddress($address);
-                        $owner->setPhoto($photo);
+                        $owner->setPhoto($fileName);
 
                         $this->ownerDAO->Add($owner);
 

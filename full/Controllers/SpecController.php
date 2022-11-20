@@ -24,11 +24,13 @@
             require_once(VIEWS_PATH."spec-list.php");
         }
 
-        public function add($id_size_of_pets, $price_per_day) {
+        public function add($price_per_day, $small_pets, $medium_pets, $large_pets) {
             try {
                 $spec = new Spec();
                 $spec->setIdKeeper($_SESSION["loggedUser"]["id"]);
-                $spec->setIdSizeOfPets($id_size_of_pets);
+                $spec->setSmallPets($small_pets);
+                $spec->setMediumPets($medium_pets);
+                $spec->setLargePets($large_pets);
                 $spec->setPricePerDay($price_per_day);
 
                 $this->specDAO->Add($spec);

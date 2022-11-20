@@ -33,7 +33,8 @@
                   if ($p_coupon->getIdOwner() == $_SESSION["loggedUser"]["id"]) {                       
               ?> 
               <h5 class ="mb-3">Operation Details</h5>
-              <div class ="mb-3">
+              <small class="text-muted mb-3">*remember that the total of the payment coupon is only 50% of the final value.</small>
+              <div class ="mb-3 mt-3">
                 <span>RESERVATION CODE: <span><strong>#<?php echo $p_coupon->getIdReservation() ?></strong></span></span> 
               </div>
               <div class ="mb-3">
@@ -50,7 +51,7 @@
               ?>
               <div class="text-center mb-3">
                   <a 
-                    href="<?php echo FRONT_ROOT."paymentcoupon/update?id=".$p_coupon->getId()."&status=paid" ?>" type="button" class ="btn btn-info">
+                    href="<?php echo FRONT_ROOT."paymentcoupon/showAddView?id=".$p_coupon->getId()."&status=paid" ?>" type="button" class ="btn btn-info">
                     Pay online&#128521;
                   </a>
               </div>              
@@ -184,10 +185,18 @@
 </section>
 <?php
   if($alert){
+    if (isset($_GET['title'])){
+
+      $alert = [
+        "title" => $_GET['title'],
+        "text" => $_GET['text'],
+        "icon" => $_GET['icon']
+    ];
+    }
 ?>
 <script>
   swal("<?php echo $alert['title']?>", "<?php echo $alert['text']?>", "<?php echo $alert['icon']?>");
 </script>
 <?php
-  }
+  } 
 ?>

@@ -16,7 +16,7 @@
           <div class="ms-3">
             <p class="fw-bold mb-1"><?php echo $pet->getName() ?></p>
             <p class="text-muted mb-0"><?php echo $pet->getPetTypeString()?> <?php echo $pet->getBreedString() ?></p>
-            <p class="text-muted mb-0"></p>
+            <p class="text-muted mb-0">&#128207;<?php echo $pet->getSizeString()?></p>
             <p class="text-muted mb-0">&#128209; <?php echo $pet->getDescription() ?></p>
           </div>
         </div>

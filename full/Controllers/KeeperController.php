@@ -41,7 +41,7 @@
 
         public function Register($first_name, $last_name, $password, $email, $dni, $id_province, $id_city, $phone, 
                                  $address, $photo) {    
-            try {
+            try {            
                 $fileName = $photo["name"];
                 $tempFileName = $photo["tmp_name"];
                 $type = $photo["type"];
@@ -50,8 +50,9 @@
                 $filePath = ROOT."Imgs/".basename($fileName);          
                 
                 $fileType = strtolower(pathinfo($filePath, PATHINFO_EXTENSION));
- 
+    
                 $imageSize = getimagesize($tempFileName);
+                
  
                 if($imageSize !== false) {
 

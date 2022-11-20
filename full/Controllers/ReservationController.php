@@ -61,7 +61,7 @@
                                 "icon" => "error"
                             ];
 
-                            header("location: ".FRONT_ROOT."owner/ownerprofile");
+                            header("location: ".FRONT_ROOT."owner/ownerprofile?title=".$alert["title"]."&text=".$alert["text"]."&icon=".$alert["icon"]);
                         } else {
                             try {
                                 $reservation = new Reservation();
@@ -82,14 +82,14 @@
                                     "icon" => "success"
                                 ];
         
-                                header("location:" . FRONT_ROOT . "owner/ownerprofile");
+                                header("location: ".FRONT_ROOT."owner/ownerprofile?title=".$alert["title"]."&text=".$alert["text"]."&icon=".$alert["icon"]);
                             } catch (Exception $ex) {
                                 $alert = [
                                     "title" => "Error",
                                     "text" => "Reservation not added, try again",
                                     "icon" => "error"
                                 ];
-                                header("location:" . FRONT_ROOT . "owner/ownerprofile");
+                                header("location: ".FRONT_ROOT."owner/ownerprofile?title=".$alert["title"]."&text=".$alert["text"]."&icon=".$alert["icon"]);
                             }
 
                             
@@ -110,20 +110,30 @@
 
                         $this->reservationDAO->add($reservation);
 
-                        echo '<script type="text/javascript">',
-                        'swal("Listo", "Reserva cargada con éxito", "success");',
-                        '</script>'
-                        ;
+                        $alert = [
+                            "title" => "Success",
+                            "text" => "Reservation added successfully!",
+                            "icon" => "success"
+                        ];
 
-                        header("location:" . FRONT_ROOT . "owner/ownerprofile");
+                        header("location: ".FRONT_ROOT."owner/ownerprofile?title=".$alert["title"]."&text=".$alert["text"]."&icon=".$alert["icon"]);
                     } catch (Exception $ex) {
-                        //throw $th;
-                        header("location:" . FRONT_ROOT . "owner/ownerprofile");
+                        $alert = [
+                            "title" => "Error",
+                            "text" => "Reservation not added, try again",
+                            "icon" => "error"
+                        ];
+                        header("location: ".FRONT_ROOT."owner/ownerprofile?title=".$alert["title"]."&text=".$alert["text"]."&icon=".$alert["icon"]);
                     }
                 }
 
             } catch (Exception $ex) {
-                //throw $th;
+                $alert = [
+                    "title" => "Error",
+                    "text" => "Error in the database, try again later",
+                    "icon" => "error"
+                ];
+                header("location: ".FRONT_ROOT."owner/ownerprofile?title=".$alert["title"]."&text=".$alert["text"]."&icon=".$alert["icon"]);
             }
 
         }
@@ -143,7 +153,6 @@
         public function update($id_reserv, $status, $id_pet, $id_date) {
             try {
                 # traigo el id_breed del pet que se cargó para la reserva
-                # FIJARSE DE HACERLO EN LA DB O ACÁ MISMO PARA LA ENTREGA
                 $pet = $this->petDAO->getById($id_pet);
                 $id_breed = $pet->getBreed();
 

@@ -17,12 +17,22 @@
             <div class="row">
               <div class="col-md-6 mb-4">
                   <div class="form-outline">
-                    <select class="form-select" name= "id_size_of_pets" required>
-                      <option selected value="1">Small</option>
-                      <option value="2">Medium</option>
-                      <option value="3">Large</option>
-                    </select>  
-                    <label class="form-label" for="id_size_of_pets">Pet Size Preference</label>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="hidden" name="small_pets" value ="0">
+                        <input class="form-check-input" type="checkbox" name="small_pets" value="1"/>
+                        <label class="form-check-label">Small</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                      <input class="form-check-input" type="hidden" name="medium_pets" value ="0">
+                      <input class="form-check-input" type="checkbox" name="medium_pets" value="1"/>
+                      <label class="form-check-label">Medium</label>
+                    </div>
+                    <div class="form-check form-check-inline">                      
+                      <input class="form-check-input" type="hidden" name="large_pets" value ="0">
+                      <input class="form-check-input" type="checkbox" name="large_pets" value="1"/>
+                      <label class="form-check-label">Large</label>
+                    </div>
+                    <label class="form-label">Pet Size Preference</label>
                   </div>
               </div>
               <div class="col-md-6 mb-4">
@@ -36,8 +46,6 @@
             <button type="submit" class="btn btn-success btn-block mb-4">
               Submit
             </button>
-            <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-            <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
           </form>
         </div>
       </div>

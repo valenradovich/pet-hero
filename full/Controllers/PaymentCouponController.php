@@ -14,9 +14,9 @@
         }
 
         public function showAddView() {
-
+            $couponList = $this->paymentCouponDAO->GetAll();
             require_once(VIEWS_PATH."validate-session.php");
-            require_once(VIEWS_PATH."add-payment-coupon.php");
+            require_once(VIEWS_PATH."add-pay.php");
         }
 
         public function add($id_r, $id_o, $amount) {
